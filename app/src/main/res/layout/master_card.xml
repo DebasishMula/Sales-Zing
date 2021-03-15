@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginVertical="3dp"
+    android:layout_marginHorizontal="6dp"
+    android:background="@drawable/master_card_shape">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        android:layout_marginVertical="5dp"
+        >
+        <TextView
+            android:id="@+id/masterCard_itemNoPartNo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.7"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:layout_marginLeft="5dp"
+            android:text="Sales zing item no 1 [124578123654] ">
+
+        </TextView>
+        <TextView
+            android:id="@+id/masterCard_tax"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight=".3"
+
+            android:textSize="15dp"
+            android:layout_marginLeft="5dp"
+            android:text="18%">
+
+        </TextView>
+    </LinearLayout>
+    <!--    Value Row1-->
+
+    <!--    Static Row2-->
+
+    <!--    Value Row2-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="5"
+        android:layout_marginVertical="4dp"
+        >
+        <TextView
+            android:id="@+id/masterCard_cat"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:gravity="center"
+            android:text="category">
+
+        </TextView>
+        <TextView
+            android:id="@+id/masterCard_size"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:gravity="center"
+            android:text="size">
+
+        </TextView>
+        <TextView
+            android:id="@+id/masterCard_color"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="color"> </TextView>
+
+        <TextView
+            android:id="@+id/masterCard_mrp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:gravity="center"
+            android:text="MRP">
+        </TextView>
+        <TextView
+            android:id="@+id/masterCard_closingQty"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:gravity="center"
+            android:text="closing qty.">
+
+        </TextView>
+
+
+    </LinearLayout>
+</LinearLayout>
