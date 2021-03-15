@@ -14,15 +14,15 @@
         android:theme="@style/Theme.TestProject2"
         android:usesCleartextTraffic="true">
         <activity android:name=".activities.Master">
+
+        </activity>
+        <activity android:name=".activities.Home" />
+        <activity android:name=".activities.LogIn">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".activities.Home" />
-        <activity android:name=".activities.LogIn">
-
         </activity>
         <activity android:name=".activities.MainActivity"></activity>
     </application>

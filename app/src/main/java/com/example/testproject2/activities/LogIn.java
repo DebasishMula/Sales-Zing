@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,7 +12,7 @@ import android.widget.Toast;
 
 import com.example.testproject2.R;
 import com.example.testproject2.api.APIService;
-import com.example.testproject2.api.APIURL;
+import com.example.testproject2.helpers.SharedPreference;
 import com.example.testproject2.models.LogInResult;
 import com.example.testproject2.models.User;
 
@@ -46,14 +47,18 @@ public class LogIn extends AppCompatActivity {
 
   User getUserCredentials()
   {
-      return new User(email.getText().toString(),password.getText().toString());
+//      user.setEmailId(email.getText().toString());
+//      user.setPassword(password.getText().toString());
+//      return user;
+
+     return new User(email.getText().toString(),password.getText().toString());
   }
     void signIn()
     {
      this.user=getUserCredentials();
      //creating Retrofit Object
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(APIURL.BASE_URL)
+                .baseUrl("http://ec2-3-16-108-16.us-east-2.compute.amazonaws.com/api/v1/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -63,9 +68,18 @@ public class LogIn extends AppCompatActivity {
         call.enqueue(new Callback<LogInResult>() {
             @Override
             public void onResponse(Call<LogInResult> call, Response<LogInResult> response) {
+                System.out.println(user.getEmailId());
+                System.out.println(user.getPassword());
                 if(response.isSuccessful())
                 {
-                    Toast.makeText(getApplicationContext(),response.body().getToken(),Toast.LENGTH_LONG).show();
+                    User  user1 =new User(user.getEmailId(),user.getPassword(),response.body().getToken());
+                    SharedPreference sharedPreference=SharedPreference.getInstance(getApplicationContext());
+                    sharedPreference.userLogin(user1);
+                    Toast.makeText(getApplicationContext(),sharedPreference.getUser().getEmailId(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),sharedPreference.getUser().getToken(),Toast.LENGTH_LONG).show();
+                    Log.e("Email",sharedPreference.getUser().getEmailId());
+                    Log.e("Token",sharedPreference.getUser().getToken());
+
                     Intent intent=new Intent(LogIn.this,Home.class);
                     startActivity(intent);
                 }

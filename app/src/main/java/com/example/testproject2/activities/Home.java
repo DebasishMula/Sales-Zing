@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.testproject2.R;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,6 +36,9 @@ public class Home extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.home_toolbar_master:
                 Toast.makeText(this, "Master", Toast.LENGTH_LONG).show();
+                Intent intent=new Intent(Home.this,Master.class);
+                startActivity(intent);
+
                 break;
             default:
                 break;

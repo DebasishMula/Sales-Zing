@@ -3,6 +3,9 @@ package com.example.testproject2.api;
 import com.example.testproject2.models.LogInResult;
 import com.example.testproject2.models.MasterItem;
 import com.example.testproject2.models.MasterResponse;
+import com.google.gson.JsonObject;
+
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -13,17 +16,19 @@ import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface APIService {
 
-    @FormUrlEncoded
-    @POST("szapi.php/")
+
+    @POST("szapi.php?action=getitemdetails")
     Call<List<MasterItem>> getMasterList(
-            @Query("action") String getItemDtails,
-            @Field("dbname") String dbname
-    );
+            @Body JsonObject dbname
+
+
+            );
 
 
     //the signin call
