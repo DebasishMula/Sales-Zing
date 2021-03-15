@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
@@ -31,18 +32,19 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Master extends AppCompatActivity {
-   private ListView listView;
+   private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_master);
-        listView=findViewById(R.id.masterListView);
+        recyclerView=findViewById(R.id.masterRecyclerView);
          getMasterItems();
     }
-
-
     public void getMasterItems(){
+        ProgressDialog progressDialog = new ProgressDialog(Master.this);
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
         TokenInterceptor interceptor=new TokenInterceptor(SharedPreference.getInstance(getApplicationContext()).getUser().getToken());
 
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
@@ -52,32 +54,33 @@ public class Master extends AppCompatActivity {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("dbname","cw_saleszing");
         Call<List<MasterItem>> call=apiServices.getMasterList(jsonObject);
+
         call.enqueue(new Callback<List<MasterItem>>() {
             @Override
             public void onResponse(Call<List<MasterItem>> call, Response<List<MasterItem>> response) {
                 if(response.isSuccessful())
                 {
+                    progressDialog.dismiss();
                     System.out.println(response.body());
                     System.out.println("hello");
                    List<MasterItem> rs = response.body();
                     Log.e("Success", new Gson().toJson(response.body()));
                     //Toast.makeText(getApplicationContext(),rs.get(0).getTaxper(),Toast.LENGTH_LONG).show();
                     AdapterOfMasterItem adapter=new AdapterOfMasterItem(Master.this,rs);
-                   listView.setAdapter(adapter);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                    recyclerView.setAdapter(adapter);
 
                 }
                 else
                 {
-                    System.out.println("error");
-                    System.out.println(response.message());
-                    System.out.println(response.body());
+                    progressDialog.dismiss();
                     Toast.makeText(getApplicationContext(),"Something Wrong",Toast.LENGTH_LONG).show();
                 }
 
             }
-
             @Override
             public void onFailure(Call<List<MasterItem>> call, Throwable t) {
+                progressDialog.dismiss();
                 Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_LONG).show();
             }
         });

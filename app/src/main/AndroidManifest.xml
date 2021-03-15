@@ -13,18 +13,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TestProject2"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.Master">
+        <activity android:name=".activities.About"></activity>
+        <activity android:name=".activities.Register" />
+        <activity android:name=".activities.Pos" />
+        <activity android:name=".activities.Master" />
+        <activity
+            android:name=".activities.Home"
+
+             />
+        <activity
+            android:name=".activities.LogIn"
+            android:launchMode="singleTask"
+            >
 
         </activity>
-        <activity android:name=".activities.Home" />
-        <activity android:name=".activities.LogIn">
+        <activity android:name=".activities.Welcome" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.MainActivity"></activity>
     </application>
 
 </manifest>
