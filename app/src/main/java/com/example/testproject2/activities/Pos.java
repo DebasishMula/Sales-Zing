@@ -43,6 +43,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Pos extends AppCompatActivity {
    private RecyclerView recyclerView;
     private EditText barcode;
+    List<ArrayList> posItemList=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,10 +75,14 @@ public class Pos extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
+                if(s.length()==13)
+                {
+                    getPosItemList(s.toString());
+                }
 
             }
         });
-        getPosItemList("fg");
+
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -95,14 +100,13 @@ public void getPosItemList(String batchname){
     progressDialog.setMessage("Loading...");
     progressDialog.show();
     TokenInterceptor interceptor=new TokenInterceptor(SharedPreference.getInstance(getApplicationContext()).getUser().getToken());
-
     OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
     Retrofit retrofit=new Retrofit.Builder().client(client).baseUrl(APIURL.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
     APIService apiServices= retrofit.create(APIService.class);
     System.out.println(SharedPreference.getInstance(getApplicationContext()).getUser().getToken());
     JsonObject jsonObject = new JsonObject();
-    jsonObject.addProperty("dbname","cw_saleszing");
-    jsonObject.addProperty("batchname","10008050204GB");
+    jsonObject.addProperty("dbname","cw_ajanta");
+    jsonObject.addProperty("batchname",batchname);
     System.out.println(jsonObject);
     Call<ArrayList<PosItem>> call=apiServices.getPosLists(jsonObject);
     System.out.println();
@@ -115,6 +119,7 @@ public void getPosItemList(String batchname){
                 System.out.println(response.body());
                 System.out.println("hello");
                 ArrayList<PosItem> rs = response.body();
+               /// posItemList.add(rs);
                 Log.e("Success", new Gson().toJson(response.body()));
                 //Toast.makeText(getApplicationContext(),rs.get(0).getTaxper(),Toast.LENGTH_LONG).show();
                 AdapterOfPositems adapter=new AdapterOfPositems(Pos.this,rs);

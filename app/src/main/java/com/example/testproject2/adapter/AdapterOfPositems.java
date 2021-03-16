@@ -33,11 +33,12 @@ public class AdapterOfPositems extends RecyclerView.Adapter<AdapterOfPositems.Vi
 
     @Override
     public void onBindViewHolder(@NonNull AdapterOfPositems.ViewHolder holder, int position) {
-     holder.pos_card_art_batch.setText(posItems.get(position).getItem_id()+" / "+posItems.get(position).getBatch_name());
+     holder.pos_card_art_batch.setText(posItems.get(position).getItemName()+" / "+posItems.get(position).getBatch_name());
      holder.pos_card_size_color.setText(posItems.get(position).getFSize()+" / "+posItems.get(position).getColor_name());
      holder.pos_card_mrp.setText(posItems.get(position).getMRP());
      holder.pos_card_qty.setText("1");
-     holder.pos_card_gross_amount.setText(Integer.parseInt(posItems.get(position).getMRP())* Integer.parseInt(holder.pos_card_qty.getText().toString()));
+     holder.pos_card_gross_amount.setText(String.valueOf(Float.valueOf(posItems.get(position).getMRP()) * Float.valueOf(holder.pos_card_qty.getText().toString())));
+
     }
 
     @Override
