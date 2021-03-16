@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#E6D9F0FA"
     tools:context=".activities.Pos">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/posToolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="#0356fc"
@@ -17,4 +18,236 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         />
+
+    <LinearLayout
+        android:id="@+id/pos1stPart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/posToolbar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="10dp"
+        android:background="@drawable/layput_shape1"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+            android:weightSum="4"
+
+            android:layout_marginVertical="10dp"
+            android:layout_marginHorizontal="4dp"
+
+            >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="SPID"
+                android:layout_weight=".5"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                >
+            </TextView>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="10235321"
+                android:layout_weight="2"
+                android:textColor="@color/black"
+                >
+            </TextView>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="DATE"
+                android:layout_weight=".5"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                >
+            </TextView>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="20/02/2021"
+                android:layout_weight="1.0"
+                android:textColor="@color/black"
+                >
+            </TextView>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/pos_2nd_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp"
+            android:layout_marginHorizontal="10dp"
+
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DOC NO."
+                android:layout_marginHorizontal="5dp"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                >
+            </TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="#1234554e65667890"
+                android:textSize="15dp"
+                android:textColor="@color/black"
+                android:layout_marginLeft="8dp"
+                >
+            </TextView>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+
+       <LinearLayout
+           android:id="@+id/pos2ndPart"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="vertical"
+           android:background="@drawable/layput_shape1"
+          app:layout_constraintTop_toBottomOf="@+id/pos1stPart"
+           android:layout_marginTop="20dp"
+           android:layout_marginHorizontal="6dp"
+           app:layout_constraintLeft_toLeftOf="parent">
+          <EditText
+              android:id="@+id/posBarcode"
+              android:layout_width="match_parent"
+              android:layout_height="40dp"
+              android:hint="Batch No.."
+              android:paddingLeft="18dp"
+              android:background="@drawable/edittext_shape1"
+              android:layout_marginHorizontal="30dp"
+              android:layout_marginVertical="16dp"
+              >
+          </EditText>
+<!--           Line Header-->
+           <LinearLayout
+
+               android:layout_width="match_parent"
+               android:layout_height="1dp"
+               android:background="@color/black"
+               android:orientation="horizontal"
+               android:layout_marginVertical="5dp"
+               >
+
+           </LinearLayout>
+<!--           Header-->
+           <LinearLayout
+
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+
+               android:orientation="horizontal"
+               android:weightSum="6"
+               android:layout_marginVertical="6dp"
+
+               >
+               <TextView
+                   android:layout_width="0dp"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1.7"
+                   android:text="Article / Batch Name"
+                   android:textSize="12sp"
+                   android:textStyle="bold"
+                   android:gravity="center"
+                   >
+
+               </TextView>
+               <TextView
+                   android:layout_width="0dp"
+                   android:layout_height="wrap_content"
+                   android:layout_weight=".8"
+                   android:text=" Size /Color "
+                   android:textSize="12dp"
+                   android:textStyle="bold"
+                   android:gravity="center"
+                   android:layout_gravity="center_vertical"
+                   >
+
+               </TextView>
+               <TextView
+                   android:layout_width="0dp"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1"
+                   android:text="Mrp(rs)"
+                   android:textSize="12dp"
+                   android:textStyle="bold"
+                   android:gravity="center"
+                   android:layout_gravity="center_vertical"
+                   >
+
+               </TextView>
+               <TextView
+                   android:layout_width="0dp"
+                   android:layout_height="wrap_content"
+                   android:layout_weight=".5"
+                   android:text="Qty."
+                   android:textSize="12dp"
+                   android:textStyle="bold"
+                   android:gravity="center"
+                   android:layout_gravity="center_vertical"
+                   >
+
+               </TextView>
+               <TextView
+                   android:layout_width="0dp"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1"
+                   android:textSize="12dp"
+                   android:text="Gross Amount"
+                   android:textStyle="bold"
+                   android:gravity="center"
+                   android:layout_gravity="center_vertical"
+                   >
+
+               </TextView>
+               <TextView
+                   android:layout_width="0dp"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1"
+                   android:textSize="12dp"
+                   android:text="Action"
+                   android:textStyle="bold"
+                   android:gravity="center"
+                   android:layout_gravity="center_vertical"
+
+                   >
+
+               </TextView>
+           </LinearLayout>
+<!--           Line Header-->
+
+
+           <androidx.coordinatorlayout.widget.CoordinatorLayout
+
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
+               <com.google.android.material.floatingactionbutton.FloatingActionButton
+                   android:id="@+id/floating_action_button"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_gravity="bottom|right"
+                   android:layout_margin="16dp"
+                   app:srcCompat="@drawable/ic_add"
+                   android:contentDescription="Save"
+                   />
+           </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+       </LinearLayout>
+    
 </androidx.constraintlayout.widget.ConstraintLayout>
