@@ -3,10 +3,12 @@ package com.example.testproject2.api;
 import com.example.testproject2.models.LogInResult;
 import com.example.testproject2.models.MasterItem;
 import com.example.testproject2.models.MasterResponse;
+import com.example.testproject2.models.PosItem;
 import com.google.gson.JsonObject;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.transform.Result;
@@ -39,4 +41,14 @@ public interface APIService {
             @Field("password") String password);
            // @Field("deviceId") String deviceId,
             //@Field("ipAddress") String ipAddress);
+
+    @POST("szapi.php?action=getbatchdetails")
+    Call<ArrayList<PosItem>> getPosLists(
+            @Body JsonObject dbname
+
+
+
+
+    );
+
 }
