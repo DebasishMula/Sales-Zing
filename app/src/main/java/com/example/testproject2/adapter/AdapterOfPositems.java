@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,10 +36,16 @@ public class AdapterOfPositems extends RecyclerView.Adapter<AdapterOfPositems.Vi
     public void onBindViewHolder(@NonNull AdapterOfPositems.ViewHolder holder, int position) {
      holder.pos_card_art_batch.setText(posItems.get(position).getItemName()+" / "+posItems.get(position).getBatch_name());
      holder.pos_card_size_color.setText(posItems.get(position).getFSize()+" / "+posItems.get(position).getColor_name());
-     holder.pos_card_mrp.setText(posItems.get(position).getMRP());
+     holder.pos_card_mrp.setText(String.valueOf(  posItems.get(position).getMRP()));
      holder.pos_card_qty.setText("1");
      holder.pos_card_gross_amount.setText(String.valueOf(Float.valueOf(posItems.get(position).getMRP()) * Float.valueOf(holder.pos_card_qty.getText().toString())));
-
+     //adding event to image button
+        holder.pos_card_del_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context,position,Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -59,6 +66,7 @@ public class AdapterOfPositems extends RecyclerView.Adapter<AdapterOfPositems.Vi
             pos_card_qty=itemView.findViewById(R.id.pos_card_qty);
             pos_card_size_color=itemView.findViewById(R.id.pos_card_size_color);
             pos_card_del_btn=itemView.findViewById(R.id.pos_card_del_btn);
+
         }
     }
 }

@@ -6,7 +6,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -15,6 +17,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -43,7 +46,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Pos extends AppCompatActivity {
    private RecyclerView recyclerView;
     private EditText barcode;
-    List<ArrayList> posItemList=new ArrayList<>();
+    ArrayList<PosItem> posItemList=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +80,11 @@ public class Pos extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 if(s.length()==13)
                 {
+
                     getPosItemList(s.toString());
+                    barcode.setText("");
+                    barcode.clearFocus();
+                    hideKeyboardFrom(getApplicationContext(),barcode);
                 }
 
             }
@@ -118,13 +125,27 @@ public void getPosItemList(String batchname){
                 progressDialog.dismiss();
                 System.out.println(response.body());
                 System.out.println("hello");
-                ArrayList<PosItem> rs = response.body();
-               /// posItemList.add(rs);
-                Log.e("Success", new Gson().toJson(response.body()));
-                //Toast.makeText(getApplicationContext(),rs.get(0).getTaxper(),Toast.LENGTH_LONG).show();
-                AdapterOfPositems adapter=new AdapterOfPositems(Pos.this,rs);
-                recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                recyclerView.setAdapter(adapter);
+                try {
+                    ArrayList<PosItem> rs = response.body();
+                    if (rs.size()>0) {
+                        PosItem pos1 = rs.get(0);
+                        posItemList.add(pos1);
+                        Log.e("Success", new Gson().toJson(response.body()));
+                        AdapterOfPositems adapter = new AdapterOfPositems(Pos.this, posItemList);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                        recyclerView.setAdapter(adapter);
+                    }
+                    else
+                    {
+                        Toast.makeText(getApplicationContext(),"Invalid Batch Name",Toast.LENGTH_SHORT).show();
+                    }
+                }
+                catch (Exception e)
+                {
+                    System.out.println(e);
+                }
+
+
 
             }
             else
@@ -142,4 +163,9 @@ public void getPosItemList(String batchname){
         }
     });
 }
+
+    public static void hideKeyboardFrom(Context context, View view) {
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
 }
