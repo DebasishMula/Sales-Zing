@@ -30,6 +30,7 @@ import com.example.testproject2.helpers.SharedPreference;
 import com.example.testproject2.helpers.TokenInterceptor;
 import com.example.testproject2.models.MasterItem;
 import com.example.testproject2.models.PosItem;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
@@ -47,6 +48,7 @@ public class Pos extends AppCompatActivity {
    private RecyclerView recyclerView;
     private EditText barcode;
     ArrayList<PosItem> posItemList=new ArrayList<>();
+    FloatingActionButton save,cancel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +60,8 @@ public class Pos extends AppCompatActivity {
         actionBar.setHomeAsUpIndicator(R.drawable.ic_back);//setting actionbar indicator
         barcode=findViewById(R.id.posBarcode);
         recyclerView=findViewById(R.id.pos_recycler_view);
+        cancel=findViewById(R.id.pos_floating_action_button2);
+        save=findViewById(R.id.pos_floating_action_button1);
 //        barcode.setOnKeyListener(new View.OnKeyListener() {
 //            @Override
 //            public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -87,6 +91,20 @@ public class Pos extends AppCompatActivity {
                     hideKeyboardFrom(getApplicationContext(),barcode);
                 }
 
+            }
+        });
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Toast.makeText(getApplicationContext(),"Save Clicked",Toast.LENGTH_SHORT).show();
+            }
+        });
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Toast.makeText(getApplicationContext(),"Cancel Clicked",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -131,7 +149,7 @@ public void getPosItemList(String batchname){
                         PosItem pos1 = rs.get(0);
                         posItemList.add(pos1);
                         Log.e("Success", new Gson().toJson(response.body()));
-                        AdapterOfPositems adapter = new AdapterOfPositems(Pos.this, posItemList);
+                        AdapterOfPositems adapter = new AdapterOfPositems(Pos.this, posItemList,recyclerView);
                         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                         recyclerView.setAdapter(adapter);
                     }

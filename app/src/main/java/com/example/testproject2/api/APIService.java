@@ -47,8 +47,11 @@ public interface APIService {
             @Body JsonObject dbname
 
 
+    );
 
-
+    @POST("szapi.php?action=postposdetails")
+    Call<ArrayList<PosItem>> savePosList(
+            @Body JsonObject dbname
     );
 
 }

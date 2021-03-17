@@ -1,6 +1,8 @@
 package com.example.testproject2.adapter;
 
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.testproject2.R;
+import com.example.testproject2.activities.Pos;
 import com.example.testproject2.models.PosItem;
 
 import java.util.ArrayList;
@@ -20,10 +23,12 @@ import java.util.ArrayList;
 public class AdapterOfPositems extends RecyclerView.Adapter<AdapterOfPositems.ViewHolder> {
     Context context;
     ArrayList<PosItem> posItems=new ArrayList<>();
+    RecyclerView recyclerView;
 
-    public AdapterOfPositems(Context context, ArrayList<PosItem> posItems) {
+    public AdapterOfPositems(Context context, ArrayList<PosItem> posItems,RecyclerView recyclerView) {
         this.context = context;
         this.posItems = posItems;
+        this.recyclerView=recyclerView;
     }
 
     @NonNull
@@ -43,7 +48,38 @@ public class AdapterOfPositems extends RecyclerView.Adapter<AdapterOfPositems.Vi
         holder.pos_card_del_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context,position,Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"Helow mariposa"+position,Toast.LENGTH_SHORT).show();
+                posItems.remove(position);
+                recyclerView.removeViewAt(position);
+                AdapterOfPositems adapterOfPositems=new AdapterOfPositems(context,posItems,recyclerView);
+                adapterOfPositems.notifyItemRemoved(position);
+            }
+        });
+        holder.pos_card_qty.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+                PosItem pos = posItems.get(position);
+                pos.setFSize(s.toString());
+                String gros = String.valueOf(Float.valueOf(posItems.get(position).getMRP()) * Float.valueOf(posItems.get(position).getFSize()));
+                holder.pos_card_gross_amount.setText(gros);
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+
+
+
+              // posItems.get(position).setFSize(holder.pos_card_qty.getText().toString());
+              // posItems.get(position).s(holder.pos_card_gross_amount.getText().toString());
             }
         });
     }
