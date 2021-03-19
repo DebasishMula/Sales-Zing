@@ -4,12 +4,140 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#E6D9F0FA"
     tools:context=".activities.Home">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/home_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#0356fc"
-        app:title="Sales Zing"
+
+        app:title="HATIBAGAN"
         app:titleTextColor="#fff"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@drawable/layput_shape1"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginVertical="10dp"
+
+        >
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="From Date : "
+           android:textColor="@color/black"
+           android:paddingLeft="15dp">
+
+       </TextView>
+        <TextView
+            android:id="@+id/homeFormDateButtom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Date"
+            android:textColor="#000"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="3dp"
+            android:background="@drawable/button_shape_1"
+            >
+
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="To Date : "
+            android:textColor="#000"
+            android:paddingLeft="15dp">
+
+        </TextView>
+        <TextView
+            android:id="@+id/homeToDateButtom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Date"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="3dp"
+            android:textColor="#000"
+
+            android:background="@drawable/button_shape_1"
+            >
+
+        </TextView>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:orientation="horizontal"
+        android:weightSum="4"
+        android:gravity="center"
+        android:background="#D5D5D5"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="SL NO"
+            android:textStyle="bold"
+            android:textSize="16dp"
+            android:paddingLeft="10dp"
+            android:gravity="center"
+            android:layout_weight="1"
+            >
+
+        </TextView>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:textStyle="bold"
+            android:textSize="16dp"
+            android:paddingLeft="10dp"
+            android:layout_weight="1"
+            >
+
+        </TextView>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Value"
+            android:textStyle="bold"
+            android:textSize="16dp"
+            android:paddingLeft="5dp"
+            android:layout_weight="1"
+            >
+
+        </TextView>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Quantity"
+            android:textStyle="bold"
+            android:textSize="16dp"
+
+            android:layout_weight="1"
+            >
+
+        </TextView>
+
+
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/home_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="4dp"
+        android:layout_marginVertical="5dp"
+        android:background="@drawable/layput_shape1"
+        >
+    </androidx.recyclerview.widget.RecyclerView>
+
 </LinearLayout>

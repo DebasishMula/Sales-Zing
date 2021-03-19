@@ -95,6 +95,7 @@ public class LogIn extends AppCompatActivity {
                     sharedPreference.userLogin(user1);
                     Intent intent = new Intent(LogIn.this, Home.class);
                     startActivity(intent);
+                    finish();
                 } else {
                     progressDialog.dismiss();
                     Toast.makeText(getApplicationContext(), "Invalid Credentials", Toast.LENGTH_LONG).show();

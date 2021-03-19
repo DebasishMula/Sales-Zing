@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AlertDialogCustom" parent="ThemeOverlay.AppCompat.Dialog.Alert">
+    //whichever parent theme you want to use here
+    //add these 2 to allow all APIs
+    <item name="android:buttonBarPositiveButtonStyle">@style/PositiveAlertButtonStyle</item>
+    <item name="android:buttonBarNegativeButtonStyle">
+
+        @style/NegativeButtonStyle</item>
+    </style>
+    <style name="PositiveAlertButtonStyle" >
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:backgroundTint">#F44336</item>
+
+
+    </style>
+    <style name="NegativeButtonStyle" >
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:backgroundTint">#2196F3</item>
+
+
+    </style>
+</resources>

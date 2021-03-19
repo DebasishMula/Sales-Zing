@@ -1,6 +1,8 @@
 package com.example.testproject2.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -39,8 +41,8 @@ public class AdapterOfPositems extends RecyclerView.Adapter<AdapterOfPositems.Vi
 
     @Override
     public void onBindViewHolder(@NonNull AdapterOfPositems.ViewHolder holder, int position) {
-     holder.pos_card_art_batch.setText(posItems.get(position).getItemName()+" / "+posItems.get(position).getBatch_name());
-     holder.pos_card_size_color.setText(posItems.get(position).getFSize()+" / "+posItems.get(position).getColor_name());
+     holder.pos_card_art_batch.setText(posItems.get(position).getItemName()+" ("+posItems.get(position).getBatch_name()+")");
+     holder.pos_card_size_color.setText(posItems.get(position).getColor_name()+" ("+posItems.get(position).getFSize()+")");
      holder.pos_card_mrp.setText(String.valueOf(  posItems.get(position).getMRP()));
      holder.pos_card_qty.setText("1");
      holder.pos_card_gross_amount.setText(String.valueOf(Float.valueOf(posItems.get(position).getMRP()) * Float.valueOf(holder.pos_card_qty.getText().toString())));
@@ -48,11 +50,28 @@ public class AdapterOfPositems extends RecyclerView.Adapter<AdapterOfPositems.Vi
         holder.pos_card_del_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context,"Helow mariposa"+position,Toast.LENGTH_SHORT).show();
-                posItems.remove(position);
-                recyclerView.removeViewAt(position);
-                AdapterOfPositems adapterOfPositems=new AdapterOfPositems(context,posItems,recyclerView);
-                adapterOfPositems.notifyItemRemoved(position);
+                AlertDialog.Builder builder=new AlertDialog.Builder(context,R.style.AlertDialogCustom);
+                builder.setTitle("Alert");
+                builder.setMessage("Are You Sure?");
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        posItems.remove(position);
+                        recyclerView.removeViewAt(position);
+                        AdapterOfPositems adapterOfPositems=new AdapterOfPositems(context,posItems,recyclerView);
+                        adapterOfPositems.notifyItemRemoved(position);
+                        Toast.makeText(context, "Deleted Successfully", Toast.LENGTH_SHORT).show();
+                    }
+                }).setNegativeButton("Exit", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                       dialog.dismiss();
+                    }
+
+                });
+
+                AlertDialog dialog =builder.create();
+                dialog.show();
             }
         });
         holder.pos_card_qty.addTextChangedListener(new TextWatcher() {
@@ -65,10 +84,26 @@ public class AdapterOfPositems extends RecyclerView.Adapter<AdapterOfPositems.Vi
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
 
-                PosItem pos = posItems.get(position);
-                pos.setFSize(s.toString());
-                String gros = String.valueOf(Float.valueOf(posItems.get(position).getMRP()) * Float.valueOf(posItems.get(position).getFSize()));
-                holder.pos_card_gross_amount.setText(gros);
+                if (s.toString().equals("")){
+                    holder.pos_card_qty.setText("0");
+                    PosItem pos=posItems.get(position);
+                    pos.setQty("0");
+                    holder.pos_card_gross_amount.setText("0");
+                    pos.setgAmount("0");
+                    posItems.set(position,pos);
+                }
+                else {
+
+
+                    PosItem pos = posItems.get(position);
+                    pos.setQty(s.toString());
+                    String gros = String.valueOf(Float.valueOf(posItems.get(position).getMRP()) * Float.valueOf(posItems.get(position).getQty()));
+                    holder.pos_card_gross_amount.setText(gros);
+                    pos.setgAmount(gros);
+                    posItems.set(position,pos);
+                    //holder.pos_card_gross_amount.setText(String.valueOf(Float.valueOf(posItems.get(position).getMRP()) * Float.valueOf(holder.pos_card_qty.getText().toString())));
+
+                }
 
             }
 

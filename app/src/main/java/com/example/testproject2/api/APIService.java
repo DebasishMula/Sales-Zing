@@ -1,9 +1,11 @@
 package com.example.testproject2.api;
 
+import com.example.testproject2.models.HomeList;
 import com.example.testproject2.models.LogInResult;
 import com.example.testproject2.models.MasterItem;
 import com.example.testproject2.models.MasterResponse;
 import com.example.testproject2.models.PosItem;
+import com.example.testproject2.models.ResponseSms;
 import com.google.gson.JsonObject;
 
 import org.json.JSONObject;
@@ -50,8 +52,13 @@ public interface APIService {
     );
 
     @POST("szapi.php?action=postposdetails")
-    Call<ArrayList<PosItem>> savePosList(
-            @Body JsonObject dbname
+    Call<ResponseSms> savePosList(
+            @Body JsonObject data
     );
+    @POST("szapi.php?action=getdashboarddetails")
+    Call<ArrayList<HomeList>> getHomeLists(
+            @Body JsonObject data
+    );
+
 
 }
