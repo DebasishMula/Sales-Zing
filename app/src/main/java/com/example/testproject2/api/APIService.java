@@ -5,6 +5,7 @@ import com.example.testproject2.models.LogInResult;
 import com.example.testproject2.models.MasterItem;
 import com.example.testproject2.models.MasterResponse;
 import com.example.testproject2.models.PosItem;
+import com.example.testproject2.models.RegisterItem;
 import com.example.testproject2.models.ResponseSms;
 import com.google.gson.JsonObject;
 
@@ -59,6 +60,9 @@ public interface APIService {
     Call<ArrayList<HomeList>> getHomeLists(
             @Body JsonObject data
     );
-
+    @POST("szapi.php?action=getsalesregister")
+    Call<ArrayList<RegisterItem>> getRegisterList(
+            @Body JsonObject data
+    );
 
 }

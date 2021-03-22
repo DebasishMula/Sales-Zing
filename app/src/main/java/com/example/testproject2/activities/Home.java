@@ -24,12 +24,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 import okhttp3.OkHttpClient;
@@ -45,6 +49,7 @@ public class Home extends AppCompatActivity {
     RecyclerView recyclerView;
     private TextView FormDtae,ToDate;
     final Calendar myCalendar = Calendar.getInstance();
+    ImageButton searchButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +58,10 @@ public class Home extends AppCompatActivity {
         setSupportActionBar(toolbar);
         FormDtae=findViewById(R.id.homeFormDateButtom);
         ToDate=findViewById(R.id.homeToDateButtom);
+        searchButton=findViewById(R.id.homeSearchButton);
+//        initialize FromDate And ToDate
+        initializeFromAndToDate();
+
         FormDtae.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,7 +81,13 @@ public class Home extends AppCompatActivity {
 
         });
         recyclerView=findViewById(R.id.home_recycler_view);
-        getHomeLists();
+        getHomeLists(FormDtae.getText().toString(),ToDate.getText().toString());
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getHomeLists(FormDtae.getText().toString(),ToDate.getText().toString());
+            }
+        });
 
     }
 //    From Date
@@ -84,12 +99,11 @@ public class Home extends AppCompatActivity {
             myCalendar.set(Calendar.YEAR, year);
             myCalendar.set(Calendar.MONTH, monthOfYear);
             myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            String myFormat = "dd/MM/yy"; //In which you need put here
+            String myFormat = "dd-MM-yyyy"; //In which you need put here
             SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
             FormDtae.setText(sdf.format( myCalendar.getTime()));
             //Toast.makeText(getApplicationContext(),sdf.format( myCalendar.getTime()),Toast.LENGTH_LONG).show();
             //System.out.println(sdf.format( myCalendar.getTime()));
-
         }
 
     };
@@ -102,7 +116,7 @@ public class Home extends AppCompatActivity {
             myCalendar.set(Calendar.YEAR, year);
             myCalendar.set(Calendar.MONTH, monthOfYear);
             myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            String myFormat = "dd/MM/yy"; //In which you need put here
+            String myFormat = "dd-MM-yyyy"; //In which you need put here
             SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
             ToDate.setText(sdf.format( myCalendar.getTime()));
             //Toast.makeText(getApplicationContext(),sdf.format( myCalendar.getTime()),Toast.LENGTH_LONG).show();
@@ -150,7 +164,16 @@ public class Home extends AppCompatActivity {
         }
         return true;
     }
-    public void getHomeLists(){
+//    initialize From Date And To Date
+    public void initializeFromAndToDate()
+    {
+        String myFormat = "dd-MM-yyyy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
+        Date date = new Date();
+        FormDtae.setText(sdf.format(date));
+        ToDate.setText(sdf.format(date));
+    }
+    public void getHomeLists(String fromDate,String toDate){
         ProgressDialog progressDialog = new ProgressDialog(Home.this);
         progressDialog.setMessage("Loading...");
         progressDialog.show();
@@ -161,28 +184,40 @@ public class Home extends AppCompatActivity {
         System.out.println(SharedPreference.getInstance(getApplicationContext()).getUser().getToken());
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("dbname","cw_ajanta");
+        jsonObject.addProperty("authtoken","1");
+        jsonObject.addProperty("fromdate",fromDate);
+        jsonObject.addProperty("todate",toDate);
         System.out.println(jsonObject);
         Call<ArrayList<HomeList>> call=apiServices.getHomeLists(jsonObject);
         call.enqueue(new Callback<ArrayList<HomeList>>() {
             @Override
             public void onResponse(Call<ArrayList<HomeList>> call, Response<ArrayList<HomeList>> response) {
                 if(response.isSuccessful()){
-                    System.out.println("hello brere");
                     progressDialog.dismiss();
                     ArrayList<HomeList> homeLists=response.body();
-                    System.out.println(homeLists.toString());
-                    AdapterOfHomeItems homeAdapter=new AdapterOfHomeItems(Home.this,homeLists);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                    recyclerView.setAdapter(homeAdapter);
+                    if(homeLists.size()==0)
+                    {
+
+                        Toast.makeText(getApplicationContext(),"No Data Found",Toast.LENGTH_SHORT).show();
+                        System.out.println(homeLists.toString());
+                        AdapterOfHomeItems homeAdapter=new AdapterOfHomeItems(Home.this,homeLists);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                        recyclerView.setAdapter(homeAdapter);
+                    }
+                    else
+                    {
+                        System.out.println(homeLists.toString());
+                        AdapterOfHomeItems homeAdapter=new AdapterOfHomeItems(Home.this,homeLists);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                        recyclerView.setAdapter(homeAdapter);
+                    }
 
                 }
                 else {
                     progressDialog.dismiss();
                     Toast.makeText(getApplicationContext(),"Something Wrong",Toast.LENGTH_LONG).show();
                 }
-
             }
-
             @Override
             public void onFailure(Call<ArrayList<HomeList>> call, Throwable t) {
                 Log.v("rese",call.request().url().toString());

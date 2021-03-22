@@ -1,11 +1,10 @@
 package com.example.testproject2.models;
+import java.io.Serializable;
 
-public class PosItem {
-    String   item_id,batch_name,FSize,ItemName,UomName,PartNo,MRP,color_name,closingqty,gAmount,qty;
-
-
-
-    public PosItem(String item_id, String batch_name, String FSize, String itemName, String uomName, String partNo, String MRP, String color_name, String closingqty, String gAmount,String qty) {
+@SuppressWarnings("serial")
+public class PosItem implements  Serializable{
+    String   item_id,batch_name,FSize,ItemName,UomName,PartNo,MRP,color_name,closingqty,gAmount,qty,gstRate;
+    public PosItem(String item_id, String batch_name, String FSize, String itemName, String uomName, String partNo, String MRP, String color_name, String closingqty, String gAmount,String qty,String gstRate) {
         this.item_id = item_id;
         this.batch_name = batch_name;
         this.FSize = FSize;
@@ -17,7 +16,17 @@ public class PosItem {
         this.closingqty = closingqty;
         this.gAmount=gAmount;
         this.qty=qty;
+        this.gstRate=gstRate;
     }
+
+    public String getGstRate() {
+        return gstRate;
+    }
+
+    public void setGstRate(String gstRate) {
+        this.gstRate = gstRate;
+    }
+
     public String getQty() {
         return qty;
     }

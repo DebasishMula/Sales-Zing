@@ -19,17 +19,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.testproject2.R;
 import com.example.testproject2.activities.Pos;
 import com.example.testproject2.models.PosItem;
+import com.example.testproject2.models.PosItemSave;
 
 import java.util.ArrayList;
 
 public class AdapterOfPositems extends RecyclerView.Adapter<AdapterOfPositems.ViewHolder> {
     Context context;
     ArrayList<PosItem> posItems=new ArrayList<>();
+    ArrayList<PosItemSave> saveItems=new ArrayList<>();
     RecyclerView recyclerView;
 
-    public AdapterOfPositems(Context context, ArrayList<PosItem> posItems,RecyclerView recyclerView) {
+    public AdapterOfPositems(Context context, ArrayList<PosItem> posItems,ArrayList<PosItemSave> saveItems,RecyclerView recyclerView) {
         this.context = context;
         this.posItems = posItems;
+        this.saveItems=saveItems;
         this.recyclerView=recyclerView;
     }
 
@@ -57,8 +60,9 @@ public class AdapterOfPositems extends RecyclerView.Adapter<AdapterOfPositems.Vi
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         posItems.remove(position);
+                        saveItems.remove(position);
                         recyclerView.removeViewAt(position);
-                        AdapterOfPositems adapterOfPositems=new AdapterOfPositems(context,posItems,recyclerView);
+                        AdapterOfPositems adapterOfPositems=new AdapterOfPositems(context,posItems,saveItems,recyclerView);
                         adapterOfPositems.notifyItemRemoved(position);
                         Toast.makeText(context, "Deleted Successfully", Toast.LENGTH_SHORT).show();
                     }
@@ -96,11 +100,15 @@ public class AdapterOfPositems extends RecyclerView.Adapter<AdapterOfPositems.Vi
 
 
                     PosItem pos = posItems.get(position);
+                    PosItemSave itemSave=saveItems.get(position);
                     pos.setQty(s.toString());
+                    itemSave.setQty(s.toString());
                     String gros = String.valueOf(Float.valueOf(posItems.get(position).getMRP()) * Float.valueOf(posItems.get(position).getQty()));
                     holder.pos_card_gross_amount.setText(gros);
                     pos.setgAmount(gros);
+                    itemSave.setAmount(gros);
                     posItems.set(position,pos);
+                    saveItems.set(position,itemSave);
                     //holder.pos_card_gross_amount.setText(String.valueOf(Float.valueOf(posItems.get(position).getMRP()) * Float.valueOf(holder.pos_card_qty.getText().toString())));
 
                 }

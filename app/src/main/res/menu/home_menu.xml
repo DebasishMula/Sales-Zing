@@ -3,29 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/home_toolbar_pos"
-        android:title="Pos"
+        android:title="POS"
         >
 
     </item>
     <item
         android:id="@+id/home_toolbar_register"
-        android:title="Register"
+        android:title="REGISTER"
 
         >
     </item>
     <item
         android:id="@+id/home_toolbar_master"
-        android:title="Master"
+        android:title="MASTER"
         >
     </item>
     <item
         android:id="@+id/home_toolbar_about"
-        android:title="About"
+        android:title="ABOUT"
         >
     </item>
     <item
         android:id="@+id/home_toolbar_logout"
-        android:title="Logout"
+        android:title="LOG OUT"
         >
     </item>
 

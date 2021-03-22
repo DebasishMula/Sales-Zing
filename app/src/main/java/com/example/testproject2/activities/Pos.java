@@ -35,6 +35,7 @@ import com.example.testproject2.helpers.SharedPreference;
 import com.example.testproject2.helpers.TokenInterceptor;
 import com.example.testproject2.models.MasterItem;
 import com.example.testproject2.models.PosItem;
+import com.example.testproject2.models.PosItemSave;
 import com.example.testproject2.models.ResponseSms;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
@@ -56,8 +57,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Pos extends AppCompatActivity {
    private RecyclerView recyclerView;
-    private EditText barcode;
+    private EditText barcode,mobileInput;
     ArrayList<PosItem> posItemList=new ArrayList<>();
+    ArrayList<PosItemSave>saveList=new ArrayList<>();
     FloatingActionButton save,cancel,add;
     Button scan;
     @Override
@@ -70,6 +72,7 @@ public class Pos extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_back);//setting actionbar indicator
         barcode=findViewById(R.id.posBarcode);
+        mobileInput=findViewById(R.id.posMobile);
         recyclerView=findViewById(R.id.pos_recycler_view);
         cancel=findViewById(R.id.pos_floating_action_button2);
         save=findViewById(R.id.pos_floating_action_button1);
@@ -110,7 +113,21 @@ public class Pos extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                savePosItemList();
+                if(mobileInput.getText().toString().equals(""))
+                {
+                    Toast.makeText(getApplicationContext(),"Enter Mobile No. First",Toast.LENGTH_SHORT).show();
+                    mobileInput.setFocusable(true);
+                }
+                else if(mobileInput.getText().toString().length()!=10)
+                {
+                    Toast.makeText(getApplicationContext(),"Invalid Mobile No.",Toast.LENGTH_SHORT).show();
+
+                }
+                else
+                {
+                    savePosItemList();
+                }
+
             }
         });
         cancel.setOnClickListener(new View.OnClickListener() {
@@ -126,6 +143,9 @@ public class Pos extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent=new Intent(getApplicationContext(), Pos.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+//                ActivityManager activityManager = (ActivityManager)getApplicationContext().getSystemService(Context.ACTIVITY_SERVICE);
+//                List<ActivityManager.RunningTaskInfo> list=activityManager.getRunningTasks(2);
+//                System.out.println(list);
                 startActivity(intent);
             }
         });
@@ -170,8 +190,10 @@ public void getPosItemList(String batchname){
                     if (rs.size()>0) {
                         PosItem pos1 = rs.get(0);
                         posItemList.add(pos1);
+                        PosItemSave posItemSave=new PosItemSave(pos1.getItem_id(),pos1.getBatch_name(),"1", pos1.getMRP(),pos1.getColor_name(),pos1.getUomName(),pos1.getGstRate(),String.valueOf(1*Float.valueOf(pos1.getMRP())),pos1.getFSize());
+                        saveList.add(posItemSave);
                         Log.e("Success", new Gson().toJson(response.body()));
-                        AdapterOfPositems adapter = new AdapterOfPositems(Pos.this, posItemList,recyclerView);
+                        AdapterOfPositems adapter = new AdapterOfPositems(Pos.this, posItemList,saveList,recyclerView);
                         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                         recyclerView.setAdapter(adapter);
                     }
@@ -227,8 +249,10 @@ public void getPosItemList(String batchname){
         jsonObject1.addProperty("salespersonid","1");
         jsonObject1.addProperty("voucherno","11254");
         jsonObject1.addProperty("voucherdate","12/12/2021");
+        jsonObject1.addProperty("mobileno",mobileInput.getText().toString());
         Gson gson = new GsonBuilder().create();
-        JsonArray jsonArray1 = gson.toJsonTree(posItemList).getAsJsonArray();
+
+        JsonArray jsonArray1 = gson.toJsonTree(saveList).getAsJsonArray();
         jsonObject1.add("items", jsonArray1);
         jsonArray.add(jsonObject1);
         jsonObject.add("data",jsonArray);
@@ -282,7 +306,7 @@ public void getPosItemList(String batchname){
 
             }
             else {
-                Toast.makeText(this,"Invalid Barcode",Toast.LENGTH_SHORT);
+                Toast.makeText(this,"Invalid Barcode",Toast.LENGTH_SHORT).show();
             }
         }
         else {

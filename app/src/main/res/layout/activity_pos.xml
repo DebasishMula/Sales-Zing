@@ -50,57 +50,97 @@
                 android:layout_weight=".5"
                 android:text="SPID"
                 android:textAlignment="center"
-                android:textStyle="bold"></TextView>
+                android:textStyle="bold">
+
+            </TextView>
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
+                android:layout_weight="1.5"
                 android:text="10235321"
-                android:textColor="@color/black"></TextView>
+                android:textColor="@color/black">
 
+            </TextView>
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
                 android:text="DATE"
                 android:textAlignment="center"
-                android:textStyle="bold"></TextView>
+                android:textStyle="bold">
+
+            </TextView>
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.0"
+                android:layout_weight="1.5"
                 android:text="20/02/2021"
-                android:textColor="@color/black"></TextView>
+                android:textColor="@color/black">
+
+            </TextView>
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/pos_2nd_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
+            android:layout_height="0dp"
+
             android:layout_marginBottom="10dp"
             android:orientation="horizontal"
+            android:layout_weight="2"
 
             >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_weight="0.2"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:text="MOB:"
+                >
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/posMobile"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1.2"
+                android:background="@drawable/edittext_shape1"
+                android:inputType="number"
+                android:paddingLeft="4dp"
+                android:paddingVertical="4dp"
+                android:textSize="15dp"
+               >
+
+            </EditText>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_weight="0.2"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:text="DOC NO.:"
+                >
+
+            </TextView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="5dp"
-                android:text="DOC NO."
-                android:textAlignment="center"
-                android:textStyle="bold"></TextView>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_marginLeft="8dp"
-                android:text="#1234554e65667890"
+                android:layout_weight="0.4"
+                android:text="[1234566790]"
+                android:layout_gravity="center"
+
                 android:textColor="@color/black"
-                android:textSize="15dp"></TextView>
+                android:textSize="14dp">
+
+            </TextView>
 
         </LinearLayout>
     </LinearLayout>

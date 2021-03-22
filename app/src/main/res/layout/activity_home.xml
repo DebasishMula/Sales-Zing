@@ -14,65 +14,121 @@
         android:background="#0356fc"
 
         app:title="HATIBAGAN"
+        app:subtitle="hatibagan@gmail.com"
+        app:subtitleTextColor="#FFF"
         app:titleTextColor="#fff"/>
-
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="36dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:background="@drawable/layput_shape1"
-        android:layout_marginHorizontal="8dp"
-        android:layout_marginVertical="10dp"
-
+        android:layout_marginHorizontal="4dp"
+        android:layout_marginTop="10dp"
         >
-       <TextView
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="From Date : "
-           android:textColor="@color/black"
-           android:paddingLeft="15dp">
-
-       </TextView>
-        <TextView
-            android:id="@+id/homeFormDateButtom"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Select Date"
-            android:textColor="#000"
-            android:paddingHorizontal="10dp"
-            android:paddingVertical="3dp"
-            android:background="@drawable/button_shape_1"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="10dp"
+            android:weightSum="3"
             >
 
-        </TextView>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.1"
+                android:text="From Date  "
+                android:textColor="@color/black"
+                android:textAlignment="center"
+                android:textSize="16dp">
 
-        <TextView
-            android:layout_width="wrap_content"
+            </TextView>
+
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="To Date  "
+                android:textSize="16dp"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:layout_weight="1.1"
+                >
+
+            </TextView>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="To Date : "
-            android:textColor="#000"
-            android:paddingLeft="15dp">
-
-        </TextView>
-        <TextView
-            android:id="@+id/homeToDateButtom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Select Date"
-            android:paddingHorizontal="10dp"
-            android:paddingVertical="3dp"
-            android:textColor="#000"
-
-            android:background="@drawable/button_shape_1"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginHorizontal="10dp"
+            android:weightSum="3"
             >
 
-        </TextView>
 
 
+            <TextView
+                android:id="@+id/homeFormDateButtom"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Select Date"
+                android:textSize="16dp"
+                android:textColor="#000"
+                android:layout_weight="1.1"
+                android:textAlignment="center"
+                android:paddingVertical="5dp"
+                android:layout_marginHorizontal="10dp"
+                android:background="@drawable/button_shape_1"
+                >
+
+            </TextView>
+
+
+            <TextView
+                android:id="@+id/homeToDateButtom"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Select Date"
+                android:layout_weight="1.1"
+                android:textSize="16dp"
+                android:paddingVertical="5dp"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:layout_marginHorizontal="10dp"
+                android:background="@drawable/button_shape_1"
+                >
+
+            </TextView>
+
+            <ImageButton
+                android:id="@+id/homeSearchButton"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+
+                android:text="Search"
+                android:layout_weight="0.8"
+                android:src="@drawable/ic_search"
+                android:layout_marginRight="20dp"
+
+                android:backgroundTint="#7896AF"
+                android:textAllCaps="false">
+
+            </ImageButton>
+
+        </LinearLayout>
 
     </LinearLayout>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -80,6 +136,7 @@
         android:orientation="horizontal"
         android:weightSum="4"
         android:gravity="center"
+        android:layout_marginTop="6dp"
         android:background="#D5D5D5"
         >
         <TextView

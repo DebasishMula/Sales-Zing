@@ -20,4 +20,26 @@
 
 
     </style>
+    <style name="MyDatePickerDialogTheme" parent="android:Theme.Material.Light.Dialog">
+        <item name="colorAccent">#FF3F51B5</item>
+        <item name="android:colorPrimary">#FF3F51B5</item>
+        <item name="android:colorPrimaryDark">#FF3F51B5</item>
+        <item name="android:colorAccent">#FF3F51B5</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/PositiveButtonStyleOfDatePicker</item>
+        <item name="android:buttonBarNegativeButtonStyle">
+
+            @style/NegativeButtonStyleOfDatePicker</item>
+    </style>
+    <style name="NegativeButtonStyleOfDatePicker" >
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:backgroundTint">#ff303f9f</item>
+
+
+    </style>
+    <style name="PositiveButtonStyleOfDatePicker" >
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:backgroundTint">#ff303f9f</item>
+
+
+    </style>
 </resources>
