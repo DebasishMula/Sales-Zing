@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/layput_shape1"
+        android:background="@drawable/layout_shape2"
         android:orientation="vertical"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/posToolbar">
@@ -62,21 +62,15 @@
                 android:textColor="@color/black">
 
             </TextView>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight=".5"
-                android:text="DATE"
-                android:textAlignment="center"
-                android:textStyle="bold">
 
-            </TextView>
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.5"
+                android:layout_weight="2"
                 android:text="20/02/2021"
+                android:gravity="right"
+                android:paddingRight="10dp"
                 android:textColor="@color/black">
 
             </TextView>
@@ -90,15 +84,16 @@
 
             android:layout_marginBottom="10dp"
             android:orientation="horizontal"
-            android:layout_weight="2"
+            android:layout_weight="4"
 
             >
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="30dp"
-                android:layout_weight="0.2"
+                android:layout_weight=".5"
                 android:gravity="center"
                 android:textStyle="bold"
+                android:paddingStart="5dp"
                 android:text="MOB:"
                 >
 
@@ -109,34 +104,29 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_weight="1.2"
+                android:layout_weight="1.5"
                 android:background="@drawable/edittext_shape1"
                 android:inputType="number"
+                android:hint="Mobile No."
                 android:paddingLeft="4dp"
+                android:drawablePadding="10dp"
+                android:drawableLeft="@drawable/ic_mobile"
                 android:paddingVertical="4dp"
                 android:textSize="15dp"
                >
 
             </EditText>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_weight="0.2"
-                android:gravity="center"
-                android:textStyle="bold"
-                android:text="DOC NO.:"
-                >
 
-            </TextView>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
 
-                android:layout_weight="0.4"
-                android:text="[1234566790]"
+                android:layout_weight="2"
+                android:text="1234566790"
                 android:layout_gravity="center"
-
+                android:gravity="right"
+                android:paddingRight="10dp"
                 android:textColor="@color/black"
                 android:textSize="14dp">
 
@@ -152,7 +142,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="6dp"
         android:layout_marginTop="18dp"
-        android:background="@drawable/layput_shape1"
+        android:background="@drawable/layout_shape2"
         android:orientation="vertical"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pos1stPart">
@@ -172,7 +162,9 @@
                 android:layout_weight="1.5"
                 android:background="@drawable/edittext_shape1"
                 android:hint="Batch No.."
-                android:paddingLeft="18dp"></EditText>
+                android:paddingLeft="18dp">
+
+            </EditText>
 
             <Button
                 android:id="@+id/posScan"

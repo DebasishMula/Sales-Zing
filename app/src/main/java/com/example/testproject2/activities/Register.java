@@ -31,6 +31,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
 
 import okhttp3.OkHttpClient;
@@ -43,8 +45,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Register extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    LinearLayout startDate,endDate;
-    TextView fromDate,toDate;
+
+    LinearLayout startDate,endDate,reg_count_total_val_layout,reg_heading;
+    TextView fromDate,toDate,count_row,total_val;
     ImageButton imageButton;
     DatePicker picker;
     final Calendar myCalendar = Calendar.getInstance();
@@ -61,6 +64,9 @@ public class Register extends AppCompatActivity {
 
 
         startDate=findViewById(R.id.start_date_layout);
+        reg_count_total_val_layout=findViewById(R.id.reg_count_total_val_layout);
+        reg_heading=findViewById(R.id.reg_heading);
+
         recyclerView=findViewById(R.id.reg_recycler_view);
         imageButton=findViewById(R.id.reg_search_btn);
         imageButton.setOnClickListener(new View.OnClickListener() {
@@ -178,14 +184,14 @@ public class Register extends AppCompatActivity {
                         progressDialog.dismiss();
                         ArrayList<RegisterItem> rs = response.body();
                         //Toast.makeText(getApplicationContext(),rs.get(0).getTaxper(),Toast.LENGTH_LONG).show();
-                        AdapterOfRegisterItems adapter=new AdapterOfRegisterItems(Register.this,rs);
+
+                        AdapterOfRegisterItems adapter=new AdapterOfRegisterItems(Register.this,rs,set_count_and_total_mrp_val(rs));
                         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                         recyclerView.setAdapter(adapter);
+
                     }
                     else {
-                        AdapterOfRegisterItems adapter=new AdapterOfRegisterItems(Register.this,new ArrayList<>());
-                        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                        recyclerView.setAdapter(adapter);
+                        set_count_and_total_mrp_val(new ArrayList<RegisterItem>());
                         progressDialog.dismiss();
                         Toast.makeText(getApplicationContext(),"No Data Found !",Toast.LENGTH_LONG).show();
                     }
@@ -205,5 +211,20 @@ public class Register extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_LONG).show();
             }
         });
+    }
+    public ArrayList<Integer> set_count_and_total_mrp_val(ArrayList<RegisterItem> registerItems){
+        int total_mrp_val=0;
+        int count=0;
+        Iterator<RegisterItem> it=registerItems.iterator();
+        while (it.hasNext())
+        {
+            total_mrp_val+=Float.parseFloat(it.next().getMrpvalue());
+            count++;
+        }
+        ArrayList<Integer> list=new ArrayList<>() ;
+        list.add(total_mrp_val);
+        list.add(count);
+        return list;
+
     }
 }

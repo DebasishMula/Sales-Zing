@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    >
+
     <item
         android:id="@+id/home_toolbar_pos"
         android:title="POS"
+
+
         >
 
     </item>
     <item
         android:id="@+id/home_toolbar_register"
-        android:title="REGISTER"
+        android:title="DAY BOOK"
 
         >
     </item>

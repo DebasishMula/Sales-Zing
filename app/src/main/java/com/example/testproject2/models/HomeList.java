@@ -1,12 +1,13 @@
 package com.example.testproject2.models;
 
 public class HomeList {
-    String SalespersonName,qty,amount;
+    String SalespersonName,qty,amount,Cnt;
 
-    public HomeList(String SalespersonName, String qty, String amount) {
+    public HomeList(String SalespersonName, String qty, String amount,String Cnt) {
         this.SalespersonName = SalespersonName;
         this.qty = qty;
         this.amount = amount;
+        this.Cnt=Cnt;
     }
 
     public String getName() {
@@ -31,6 +32,14 @@ public class HomeList {
 
     public void setValue(String value) {
         this.amount = amount;
+    }
+
+    public String getCnt() {
+        return Cnt;
+    }
+
+    public void setCnt(String Cnt) {
+        this.Cnt = Cnt;
     }
 
     @Override

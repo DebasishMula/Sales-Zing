@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="AlertDialogCustom" parent="ThemeOverlay.AppCompat.Dialog.Alert">
     //whichever parent theme you want to use here
     //add these 2 to allow all APIs
@@ -42,4 +43,5 @@
 
 
     </style>
+   
 </resources>

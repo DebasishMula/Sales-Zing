@@ -1,6 +1,7 @@
 package com.example.testproject2.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,11 +32,28 @@ public class AdapterOfHomeItems extends RecyclerView.Adapter<AdapterOfHomeItems.
 
     @Override
     public void onBindViewHolder(@NonNull AdapterOfHomeItems.ViewHolder holder, int position) {
-        holder.name.setText(homes.get(position).getName());
-        holder.qty.setText(homes.get(position).getQty());
-        holder.value.setText(homes.get(position).getValue());
-        int sl_no=position+1;
-        holder.sl_no.setText(""+sl_no);
+
+        if (position==homes.size()-1)
+        {
+
+            holder.name.setText(homes.get(position).getName());
+            holder.qty.setText(homes.get(position).getQty());
+            holder.value.setText(homes.get(position).getValue());
+            holder.count.setText(homes.get(position).getCnt());
+            holder.sl_no.setText("Total");
+            holder.itemView.setBackgroundColor(Color.rgb(136, 128, 128));
+        }
+        else
+            {
+
+
+            holder.name.setText(homes.get(position).getName());
+            holder.qty.setText(homes.get(position).getQty());
+            holder.value.setText(homes.get(position).getValue());
+            holder.count.setText(homes.get(position).getCnt());
+            int sl_no = position + 1;
+            holder.sl_no.setText("" + sl_no);
+        }
     }
 
     @Override
@@ -44,7 +62,7 @@ public class AdapterOfHomeItems extends RecyclerView.Adapter<AdapterOfHomeItems.
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView name,qty,value,sl_no;
+        TextView name,qty,value,sl_no,count;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -52,6 +70,7 @@ public class AdapterOfHomeItems extends RecyclerView.Adapter<AdapterOfHomeItems.
             qty=itemView.findViewById(R.id.home_card_qty);
             value=itemView.findViewById(R.id.home_card_value);
             sl_no=itemView.findViewById(R.id.home_card_sl);
+            count=itemView.findViewById(R.id.home_card_count);
 
         }
     }

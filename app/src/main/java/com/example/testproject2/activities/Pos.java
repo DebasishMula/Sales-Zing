@@ -113,12 +113,8 @@ public class Pos extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mobileInput.getText().toString().equals(""))
-                {
-                    Toast.makeText(getApplicationContext(),"Enter Mobile No. First",Toast.LENGTH_SHORT).show();
-                    mobileInput.setFocusable(true);
-                }
-                else if(mobileInput.getText().toString().length()!=10)
+
+                if (mobileInput.getText().toString().length()!=10)
                 {
                     Toast.makeText(getApplicationContext(),"Invalid Mobile No.",Toast.LENGTH_SHORT).show();
 
@@ -133,9 +129,35 @@ public class Pos extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+               if(saveList.size()!=0)
+               {
+                   AlertDialog.Builder builder=new AlertDialog.Builder(Pos.this,R.style.AlertDialogCustom);
+                   builder.setTitle("Alert");
+                   builder.setMessage("Want to Close this tab?");
+                   builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                       @Override
+                       public void onClick(DialogInterface dialog, int which) {
+                           onBackPressed();
+                           finish();
+                       }
+                   }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                       @Override
+                       public void onClick(DialogInterface dialog, int which) {
+                           dialog.dismiss();
 
-               onBackPressed();
-               finish();
+                       }
+
+                   });
+
+                   AlertDialog dialog =builder.create();
+                   dialog.show();
+               }
+               else
+               {
+                   onBackPressed();
+                   finish();
+               }
+
             }
         });
         add.setOnClickListener(new View.OnClickListener() {
@@ -155,9 +177,8 @@ public class Pos extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent intent=new Intent(Pos.this,Home.class);
-                startActivity(intent);
-                return true;
+                onBackPressed();
+                return false;
 
         }
         return super.onOptionsItemSelected(item);

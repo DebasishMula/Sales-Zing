@@ -3,13 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="#096D9C"
     android:layout_height="match_parent"
     tools:context=".activities.Master">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/master_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#0356fc"
+        android:background="#06567C"
         app:title="Master"
         app:titleTextColor="#fff"
         app:layout_constraintTop_toTopOf="parent"

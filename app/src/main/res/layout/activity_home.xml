@@ -5,128 +5,111 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#E6D9F0FA"
+    android:background="#08628C"
     tools:context=".activities.Home">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/home_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#0356fc"
-
+        android:background="#08628C"
         app:title="HATIBAGAN"
         app:subtitle="hatibagan@gmail.com"
         app:subtitleTextColor="#FFF"
         app:titleTextColor="#fff"/>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/layput_shape1"
-        android:layout_marginHorizontal="4dp"
-        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+
+        android:weightSum="4"
+        android:layout_marginBottom="2dp"
         >
+
         <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/home_start_date_layout"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginTop="10dp"
-            android:layout_marginHorizontal="10dp"
-            android:weightSum="3"
-            >
-
+            android:layout_weight="1.5"
+            android:padding="2dp"
+            android:background="#417B95"
+            android:layout_marginRight="1dp"
+            android:orientation="vertical">
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.1"
-                android:text="From Date  "
-                android:textColor="@color/black"
-                android:textAlignment="center"
-                android:textSize="16dp">
-
-            </TextView>
-
-
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="To Date  "
-                android:textSize="16dp"
-                android:textAlignment="center"
-                android:textColor="#000"
-                android:layout_weight="1.1"
+                android:text="Start"
+                android:textSize="13dp"
+                android:gravity="center"
+                android:textColor="#fff"
+                android:layout_marginBottom="2dp"
+                android:layout_marginHorizontal="10dp"
                 >
 
             </TextView>
-
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginHorizontal="10dp"
-            android:weightSum="3"
-            >
-
-
-
             <TextView
                 android:id="@+id/homeFormDateButtom"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Select Date"
-                android:textSize="16dp"
-                android:textColor="#000"
-                android:layout_weight="1.1"
-                android:textAlignment="center"
-                android:paddingVertical="5dp"
-                android:layout_marginHorizontal="10dp"
-                android:background="@drawable/button_shape_1"
+                android:text="10/02/2021"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="#fff"
                 >
 
             </TextView>
-
-
-            <TextView
-                android:id="@+id/homeToDateButtom"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Select Date"
-                android:layout_weight="1.1"
-                android:textSize="16dp"
-                android:paddingVertical="5dp"
-                android:textAlignment="center"
-                android:textColor="#000"
-                android:layout_marginHorizontal="10dp"
-                android:background="@drawable/button_shape_1"
-                >
-
-            </TextView>
-
-            <ImageButton
-                android:id="@+id/homeSearchButton"
-                android:layout_width="0dp"
-                android:layout_height="45dp"
-
-                android:text="Search"
-                android:layout_weight="0.8"
-                android:src="@drawable/ic_search"
-                android:layout_marginRight="20dp"
-
-                android:backgroundTint="#7896AF"
-                android:textAllCaps="false">
-
-            </ImageButton>
 
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/home_end_date_layout"
+            android:orientation="vertical"
+            android:background="#417B95"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:padding="2dp"
+            android:layout_marginLeft="1dp"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="End"
+                android:textSize="13dp"
+                android:gravity="center"
+                android:textColor="#fff"
+                android:layout_marginBottom="2dp"
+                android:layout_marginHorizontal="10dp"
+                >
+
+            </TextView>
+            <TextView
+                android:id="@+id/homeToDateButtom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="10/02/2021"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="#fff"
+                >
+
+            </TextView>
+        </LinearLayout>
+        <ImageButton
+            android:id="@+id/homeSearchButton"
+            android:layout_marginLeft="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/ic_search"
+            android:background="#417B95"
+            >
+
+        </ImageButton>
+
+
     </LinearLayout>
+
+
 
 
 
@@ -134,20 +117,21 @@
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:orientation="horizontal"
-        android:weightSum="4"
+        android:weightSum="5"
         android:gravity="center"
         android:layout_marginTop="6dp"
-        android:background="#D5D5D5"
+        android:paddingHorizontal="15dp"
+        android:background="#888080"
         >
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="SL NO"
+            android:text="NO."
             android:textStyle="bold"
-            android:textSize="16dp"
-            android:paddingLeft="10dp"
+            android:textSize="14dp"
+            android:textColor="#FFF"
             android:gravity="center"
-            android:layout_weight="1"
+            android:layout_weight="0.5"
             >
 
         </TextView>
@@ -156,9 +140,23 @@
             android:layout_height="wrap_content"
             android:text="Name"
             android:textStyle="bold"
-            android:textSize="16dp"
+            android:textSize="14dp"
+            android:textColor="#FFF"
+            android:gravity="center"
+            android:layout_weight="1.8"
+            >
+
+        </TextView>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Count"
+            android:textStyle="bold"
+            android:textSize="14dp"
+            android:textColor="#FFF"
             android:paddingLeft="10dp"
-            android:layout_weight="1"
+            android:layout_weight=".7"
+            android:gravity="center"
             >
 
         </TextView>
@@ -167,9 +165,11 @@
             android:layout_height="wrap_content"
             android:text="Value"
             android:textStyle="bold"
-            android:textSize="16dp"
-            android:paddingLeft="5dp"
+            android:textSize="14dp"
+            android:textColor="#FFF"
+
             android:layout_weight="1"
+            android:gravity="center"
             >
 
         </TextView>
@@ -178,13 +178,13 @@
             android:layout_height="wrap_content"
             android:text="Quantity"
             android:textStyle="bold"
-            android:textSize="16dp"
-
+            android:textSize="14dp"
+            android:textColor="#FFF"
+            android:gravity="center"
             android:layout_weight="1"
             >
 
         </TextView>
-
 
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView

@@ -17,6 +17,8 @@ import com.google.gson.JsonObject;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -25,6 +27,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,6 +51,7 @@ public class Home extends AppCompatActivity {
     private Toolbar toolbar;
     RecyclerView recyclerView;
     private TextView FormDtae,ToDate;
+    LinearLayout fromLayout,toLayout;
     final Calendar myCalendar = Calendar.getInstance();
     ImageButton searchButton;
     @Override
@@ -56,25 +60,28 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         toolbar = findViewById(R.id.home_toolbar);
         setSupportActionBar(toolbar);
+
         FormDtae=findViewById(R.id.homeFormDateButtom);
         ToDate=findViewById(R.id.homeToDateButtom);
+        fromLayout=findViewById(R.id.home_start_date_layout);
+        toLayout=findViewById(R.id.home_end_date_layout);
         searchButton=findViewById(R.id.homeSearchButton);
 //        initialize FromDate And ToDate
         initializeFromAndToDate();
 
-        FormDtae.setOnClickListener(new View.OnClickListener() {
+        fromLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(Home.this, fromDate, myCalendar
+                new DatePickerDialog(Home.this,  R.style.MyDatePickerDialogTheme, fromDate, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
 
         });
-        ToDate.setOnClickListener(new View.OnClickListener() {
+        toLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(Home.this, toDate, myCalendar
+                new DatePickerDialog(Home.this,  R.style.MyDatePickerDialogTheme, toDate, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
@@ -129,6 +136,8 @@ public class Home extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.home_menu, menu);
+        // change color for icon 0
+
         return true;
     }
 
@@ -197,7 +206,6 @@ public class Home extends AppCompatActivity {
                     ArrayList<HomeList> homeLists=response.body();
                     if(homeLists.size()==0)
                     {
-
                         Toast.makeText(getApplicationContext(),"No Data Found",Toast.LENGTH_SHORT).show();
                         System.out.println(homeLists.toString());
                         AdapterOfHomeItems homeAdapter=new AdapterOfHomeItems(Home.this,homeLists);
@@ -207,6 +215,15 @@ public class Home extends AppCompatActivity {
                     else
                     {
                         System.out.println(homeLists.toString());
+                        float tCount=0,tValue=0,tQty=0;
+                        for(int i=0;i<homeLists.size();i++)
+                        {
+                            tCount=tCount+ Float.valueOf( homeLists.get(i).getCnt());
+                            tValue=tValue+ Float.valueOf( homeLists.get(i).getValue());
+                            tQty=tQty+ Float.valueOf( homeLists.get(i).getQty());
+                        }
+                        HomeList totalRowItem=new HomeList("",String.valueOf(tQty),String.valueOf(tValue),String.valueOf(tCount));
+                        homeLists.add(totalRowItem);
                         AdapterOfHomeItems homeAdapter=new AdapterOfHomeItems(Home.this,homeLists);
                         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                         recyclerView.setAdapter(homeAdapter);

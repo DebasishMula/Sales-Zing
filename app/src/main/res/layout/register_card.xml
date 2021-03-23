@@ -5,13 +5,15 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_marginVertical="1dp"
-    android:background="#FFBBDEFB"
+    android:background="#C6E1F8"
     >
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="5"
+        android:weightSum="3"
+        android:paddingVertical="10dp"
         android:layout_marginHorizontal="3dp"
 
         >
@@ -22,60 +24,6 @@
             android:text="20/01/2021"
             android:gravity="center"
             android:layout_weight="1"
-            android:textColor="#036307"
-            >
-
-        </TextView>
-        <TextView
-            android:id="@+id/reg_article"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="TS0266218221"
-            android:layout_weight="1.5"
-            android:gravity="center"
-            android:textColor="#0B2770"
-            >
-
-        </TextView>
-        <TextView
-            android:id="@+id/reg_stck"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="AA0026007001"
-            android:gravity="center"
-            android:layout_weight="1.5"
-            android:textColor="@color/black">
-
-        </TextView>
-        <TextView
-            android:id="@+id/reg_mrp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="30.00"
-            android:gravity="center"
-            android:layout_weight="1"
-            android:textColor="@color/black">
-
-        </TextView>
-
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="5"
-        android:layout_marginHorizontal="3dp"
-
-        >
-        <TextView
-            android:id="@+id/reg_time"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="9:00 AM"
-            android:textSize="12dp"
-            android:gravity="center"
-            android:layout_weight="1"
             android:textColor="@color/black"
             >
 
@@ -84,37 +32,26 @@
             android:id="@+id/reg_mob"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="( 8293253054 )"
-            android:textSize="12dp"
-            android:layout_weight="1.5"
+            android:text="9876543210"
+            android:layout_weight="1"
             android:gravity="center"
             android:textColor="@color/black"
             >
 
         </TextView>
         <TextView
-            android:id="@+id/reg_size"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="[ 7 ]"
-            android:textSize="12dp"
-            android:gravity="center"
-            android:layout_weight="1.5"
-            android:textColor="@color/black">
-
-        </TextView>
-        <TextView
             android:id="@+id/reg_mrp_val"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="3756.00"
-            android:gravity="center"
-            android:textStyle="bold"
+            android:text="982.00"
+            android:layout_marginRight="8dp"
+            android:gravity="end"
             android:layout_weight="1"
-            android:textColor="#880303">
+            android:textColor="#670505">
 
         </TextView>
 
 
     </LinearLayout>
+
 </LinearLayout>

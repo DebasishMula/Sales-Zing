@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#096D9C"
 
 
     tools:context=".activities.Register">
@@ -13,8 +16,9 @@
         android:id="@+id/registerToolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#0356fc"
-        app:title="Register"
+        android:background="#06567C"
+        app:title="Day Book"
+        app:navigationIcon="@drawable/ic_book"
         app:titleTextColor="#FFF"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -26,7 +30,8 @@
         android:orientation="horizontal"
 
         android:weightSum="4"
-        android:layout_marginBottom="2dp"
+        android:layout_marginHorizontal="3dp"
+        android:layout_marginVertical="3dp"
         >
 
         <LinearLayout
@@ -34,8 +39,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1.5"
-            android:padding="2dp"
-            android:background="#00277C"
+            android:paddingVertical="8dp"
+            android:background="@drawable/layout_back_effect"
             android:layout_marginRight="1dp"
             android:orientation="vertical">
             <TextView
@@ -61,13 +66,14 @@
         </LinearLayout>
 
         <LinearLayout
+            android:background="@drawable/layout_back_effect"
+            android:paddingVertical="8dp"
             android:id="@+id/end_date_layout"
             android:orientation="vertical"
-            android:background="#00277C"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1.5"
-            android:padding="2dp"
+
             android:layout_marginLeft="1dp"
             >
             <TextView
@@ -91,27 +97,81 @@
                 ></TextView>
         </LinearLayout>
         <ImageButton
+            android:background="@drawable/layout_back_effect"
             android:id="@+id/reg_search_btn"
             android:layout_marginLeft="2dp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:src="@drawable/ic_search"
-            android:background="#00277C"
             ></ImageButton>
 
 
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/reg_heading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        android:paddingVertical="11dp"
+        android:background="#0C4675"
+        android:layout_marginBottom="2dp"
+
         >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Date"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:textColor="#fff"
+            >
+
+        </TextView
+            >
+        <TextView
+            android:textSize="14dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Mobile No."
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            >
+
+        </TextView>
+        <TextView
+            android:textSize="14dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Total Value"
+            android:gravity="right"
+            android:layout_marginRight="8dp"
+            android:layout_weight="1"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            >
+
+        </TextView>
+
+    </LinearLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/reg_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#096D9C">
-
         </androidx.recyclerview.widget.RecyclerView>
-    </LinearLayout>
+
+          >
+           <!--        Total Header-->
+
+
+
+
+
 </LinearLayout>

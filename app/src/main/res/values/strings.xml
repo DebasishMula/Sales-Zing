@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">SalesZing</string>
+    <string name="about">CIRCUIT WORLD is a Kolkata,
+        India based company providing solutions for
+        Tally customizations, customized software development,
+        Tally Implementation, Software Support and Services. We
+        concentrate on Tally based solutions. Beside our own
+        software products we also provide professional custom
+        solutions using our enormous experience in software development.
+
+    </string>
+    <string name="contact_add"> 3/1/2, Armenian Street, 3rd Floor,
+     Suite No 312 ,Kolkata-700 001
+</string>
+    <string name="contact_no">
+ +91 990300 2059 / 62899 08880
+    </string>
+    <string name="contact_mail">sales@circuitworld.in</string>
+    <string name="website"><a href="https://circuitworld.in/" style='decoration:none'>www.circuitworld.in</a></string>
 </resources>
