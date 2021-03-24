@@ -114,8 +114,10 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="3"
+        android:layout_marginHorizontal="4dp"
         android:paddingVertical="11dp"
         android:background="#0C4675"
+
         android:layout_marginBottom="2dp"
 
         >
@@ -164,6 +166,7 @@
             android:id="@+id/reg_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="4dp"
             android:background="#096D9C">
         </androidx.recyclerview.widget.RecyclerView>
 

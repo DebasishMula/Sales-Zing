@@ -5,24 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#08628C"
+    android:background="#096D9C"
     tools:context=".activities.Home">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/home_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#08628C"
+        android:background="#06567C"
         app:title="HATIBAGAN"
         app:subtitle="hatibagan@gmail.com"
-        app:subtitleTextColor="#FFF"
+        app:subtitleTextColor="#CCCACA"
         app:titleTextColor="#fff"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-
+     android:layout_marginHorizontal="3dp"
         android:weightSum="4"
-        android:layout_marginBottom="2dp"
+       android:layout_marginVertical="3dp"
         >
 
         <LinearLayout
@@ -30,8 +30,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1.5"
-            android:padding="2dp"
-            android:background="#417B95"
+            android:paddingVertical="8dp"
+            android:background="@drawable/layout_back_effect"
             android:layout_marginRight="1dp"
             android:orientation="vertical">
             <TextView
@@ -63,11 +63,12 @@
         <LinearLayout
             android:id="@+id/home_end_date_layout"
             android:orientation="vertical"
-            android:background="#417B95"
+            android:background="@drawable/layout_back_effect"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1.5"
-            android:padding="2dp"
+
+            android:paddingVertical="8dp"
             android:layout_marginLeft="1dp"
             >
             <TextView
@@ -100,8 +101,9 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:paddingVertical="8dp"
             android:src="@drawable/ic_search"
-            android:background="#417B95"
+            android:background="@drawable/layout_back_effect"
             >
 
         </ImageButton>
@@ -119,18 +121,18 @@
         android:orientation="horizontal"
         android:weightSum="5"
         android:gravity="center"
-        android:layout_marginTop="6dp"
-        android:paddingHorizontal="15dp"
-        android:background="#888080"
+        android:layout_marginHorizontal="4dp"
+        android:paddingHorizontal="3dp"
+        android:background="#0C4675"
         >
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="NO."
+            android:text="#"
             android:textStyle="bold"
             android:textSize="14dp"
             android:textColor="#FFF"
-            android:gravity="center"
+            android:gravity="start"
             android:layout_weight="0.5"
             >
 
@@ -142,7 +144,7 @@
             android:textStyle="bold"
             android:textSize="14dp"
             android:textColor="#FFF"
-            android:gravity="center"
+            android:gravity="start"
             android:layout_weight="1.8"
             >
 
@@ -156,7 +158,7 @@
             android:textColor="#FFF"
             android:paddingLeft="10dp"
             android:layout_weight=".7"
-            android:gravity="center"
+            android:gravity="start"
             >
 
         </TextView>
@@ -169,7 +171,7 @@
             android:textColor="#FFF"
 
             android:layout_weight="1"
-            android:gravity="center"
+            android:gravity="start"
             >
 
         </TextView>
@@ -180,7 +182,7 @@
             android:textStyle="bold"
             android:textSize="14dp"
             android:textColor="#FFF"
-            android:gravity="center"
+            android:gravity="start"
             android:layout_weight="1"
             >
 
@@ -193,7 +195,7 @@
         android:layout_height="match_parent"
         android:layout_marginHorizontal="4dp"
         android:layout_marginVertical="5dp"
-        android:background="@drawable/layput_shape1"
+
         >
     </androidx.recyclerview.widget.RecyclerView>
 
