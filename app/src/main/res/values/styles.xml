@@ -11,21 +11,21 @@
     </style>
     <style name="PositiveAlertButtonStyle" >
         <item name="android:layout_marginLeft">10dp</item>
-        <item name="android:backgroundTint">#F44336</item>
+        <item name="android:backgroundTint">#FF01579B</item>
 
 
     </style>
     <style name="NegativeButtonStyle" >
         <item name="android:layout_marginRight">10dp</item>
-        <item name="android:backgroundTint">#2196F3</item>
+        <item name="android:backgroundTint">#FF01579B</item>
 
 
     </style>
     <style name="MyDatePickerDialogTheme" parent="android:Theme.Material.Light.Dialog">
-        <item name="colorAccent">#FF3F51B5</item>
-        <item name="android:colorPrimary">#FF3F51B5</item>
-        <item name="android:colorPrimaryDark">#FF3F51B5</item>
-        <item name="android:colorAccent">#FF3F51B5</item>
+        <item name="colorAccent">#FF01579B</item>
+        <item name="android:colorPrimary">#FF01579B</item>
+        <item name="android:colorPrimaryDark">#FF01579B</item>
+        <item name="android:colorAccent">#FF01579B</item>
         <item name="android:buttonBarPositiveButtonStyle">@style/PositiveButtonStyleOfDatePicker</item>
         <item name="android:buttonBarNegativeButtonStyle">
 
@@ -33,15 +33,15 @@
     </style>
     <style name="NegativeButtonStyleOfDatePicker" >
         <item name="android:layout_marginRight">10dp</item>
-        <item name="android:backgroundTint">#ff303f9f</item>
+        <item name="android:backgroundTint">#FF01579B</item>
 
 
     </style>
     <style name="PositiveButtonStyleOfDatePicker" >
         <item name="android:layout_marginRight">10dp</item>
-        <item name="android:backgroundTint">#ff303f9f</item>
+        <item name="android:backgroundTint">#FF01579B</item>
 
 
     </style>
-   
+
 </resources>

@@ -66,9 +66,9 @@
             android:drawableLeft="@drawable/ic_email"
             android:maxLines="1"
             android:singleLine="true"
-            android:inputType="number"
+            android:inputType="textEmailAddress"
             android:drawablePadding="10dp"
-            android:hint="Mobile No.">
+            android:hint="User Id.">
 
 
         </EditText>

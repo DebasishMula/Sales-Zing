@@ -3,15 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#096D9C"
+    android:background="#FFB3E5FC"
     android:layout_height="match_parent"
     tools:context=".activities.Master">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/master_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#06567C"
+        android:background="#FF01579B"
         app:title="Master"
+        app:navigationIcon="@drawable/ic_master"
         app:titleTextColor="#fff"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

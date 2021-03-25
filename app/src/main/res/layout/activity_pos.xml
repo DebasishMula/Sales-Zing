@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E6D9F0FA"
+    android:background="#FFB3E5FC"
     android:orientation="vertical"
     tools:context=".activities.Pos">
 
@@ -13,7 +13,7 @@
         android:id="@+id/posToolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#0356fc"
+        android:background="#FF01579B"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -35,7 +35,7 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="4dp"
+
 
             android:layout_marginVertical="10dp"
 
@@ -47,27 +47,24 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight=".5"
+                android:layout_weight=".7"
                 android:text="SPID"
-                android:textAlignment="center"
+
+               android:layout_marginLeft="8dp"
                 android:textStyle="bold">
 
             </TextView>
+
+            <Spinner
+                android:id="@+id/pos_sales_spinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.8"/>
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.5"
-                android:text="10235321"
-                android:textColor="@color/black">
-
-            </TextView>
-
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
                 android:text="20/02/2021"
                 android:gravity="right"
                 android:paddingRight="10dp"
@@ -87,29 +84,18 @@
             android:layout_weight="4"
 
             >
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_weight=".5"
-                android:gravity="center"
-                android:textStyle="bold"
-                android:paddingStart="5dp"
-                android:text="MOB:"
-                >
 
-            </TextView>
 
             <EditText
                 android:id="@+id/posMobile"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1.5"
+                android:layout_weight="2"
+
+                android:layout_marginLeft="8dp"
                 android:background="@drawable/edittext_shape1"
                 android:inputType="number"
                 android:hint="Mobile No."
-                android:paddingLeft="4dp"
-                android:drawablePadding="10dp"
                 android:drawableLeft="@drawable/ic_mobile"
                 android:paddingVertical="4dp"
                 android:textSize="15dp"
@@ -150,21 +136,57 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:weightSum="2"
             android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/posBarcode"
+            <LinearLayout
+                android:layout_weight=".3"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginVertical="16dp"
-                android:layout_weight="1.5"
-                android:background="@drawable/edittext_shape1"
-                android:hint="Batch No.."
-                android:paddingLeft="18dp">
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_marginLeft="8dp"
+                >
+                <Switch
+                    android:id="@+id/pos_switchButton"
+                    android:layout_width="wrap_content"
+                    android:checked="false"
+                    android:layout_centerInParent="true"
+                    android:layout_height="match_parent"
+                    />
 
-            </EditText>
+            </LinearLayout>
+<LinearLayout
+    android:layout_width="0dp"
+    android:layout_height="40dp"
+    android:orientation="horizontal"
+    android:layout_weight="1.3"
+    android:layout_gravity="center"
+    android:layout_marginLeft="2dp"
+    android:background="@drawable/edittext_shape1"
+    android:weightSum="3">
+    <EditText
+        android:id="@+id/posBarcode"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2.8"
+        android:hint="Enter Batch No."
+        android:paddingLeft="10dp"
+        android:backgroundTint="#fff"
+        >
+
+    </EditText>
+    <ImageButton
+        android:layout_weight="0.2"
+        android:id="@+id/pos_btn_clear"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+         android:layout_gravity="center"
+        android:layout_marginRight="5dp"
+        android:src="@drawable/ic_clear"
+        android:background="#fff"
+        android:visibility="gone"
+        />
+</LinearLayout>
+
 
             <Button
                 android:id="@+id/posScan"
@@ -172,31 +194,24 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="7dp"
                 android:layout_marginVertical="16dp"
-                android:layout_weight="0.5"
-                android:backgroundTint="#0356fc"
+                android:layout_weight="0.4"
+                android:backgroundTint="#FF01579B"
                 android:text="Scan">
 
             </Button>
         </LinearLayout>
 
         <!--           Line Header-->
-        <LinearLayout
 
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginVertical="5dp"
-            android:background="@color/black"
-            android:orientation="horizontal">
-
-        </LinearLayout>
 
         <LinearLayout
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:layout_marginVertical="6dp"
+            android:paddingVertical="6dp"
             android:orientation="horizontal"
+            android:background="#FF0277BD"
             android:weightSum="6"
 
             >
@@ -206,6 +221,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.7"
                 android:gravity="center"
+                android:textColor="#fff"
                 android:text="Article"
 
                 android:textStyle="bold">
@@ -219,6 +235,7 @@
                 android:layout_weight=".8"
                 android:gravity="center"
                 android:text=" Color"
+                android:textColor="#fff"
                 android:textSize="12dp"
                 android:textStyle="bold">
 
@@ -229,6 +246,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
+                android:textColor="#fff"
                 android:gravity="center"
                 android:text="Mrp"
                 android:textSize="12dp"
@@ -241,6 +259,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight=".5"
+                android:textColor="#fff"
                 android:gravity="center"
                 android:text="Qty."
                 android:textSize="12dp"
@@ -255,6 +274,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="Mrp Value"
+                android:textColor="#fff"
                 android:textSize="12dp"
                 android:textStyle="bold">
 
@@ -263,15 +283,7 @@
 
         </LinearLayout>
         <!--           Line Header-->
-        <LinearLayout
 
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginVertical="5dp"
-            android:background="@color/black"
-            android:orientation="horizontal">
-
-        </LinearLayout>
     </LinearLayout>
 
 

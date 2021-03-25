@@ -2,9 +2,8 @@
 <LinearLayout
 xmlns:android="http://schemas.android.com/apk/res/android"
 android:layout_width="match_parent"
-
-    android:layout_marginVertical="1dp"
-    android:background="#C6E1F8"
+    android:layout_marginTop="2dp"
+    android:background="#fff"
     android:layout_height="wrap_content">
 
 <LinearLayout
@@ -14,6 +13,7 @@ android:layout_width="match_parent"
     android:weightSum="5"
     android:paddingHorizontal="3dp"
    android:paddingVertical="10dp"
+
     >
 
     <TextView
@@ -24,7 +24,7 @@ android:layout_width="match_parent"
         android:gravity="start"
         android:textSize="14dp"
         android:textColor="#000"
-
+android:layout_marginLeft="10dp"
         android:layout_weight="0.5"
         >
     </TextView>
@@ -45,7 +45,7 @@ android:layout_width="match_parent"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="10"
-        android:gravity="start"
+        android:gravity="end"
         android:textSize="14dp"
         android:textColor="#000"
         android:layout_weight="0.7"
@@ -57,7 +57,7 @@ android:layout_width="match_parent"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="12587.00"
-        android:gravity="start"
+        android:gravity="end"
         android:textSize="14dp"
         android:textColor="#000"
         android:layout_weight="1"
@@ -70,7 +70,8 @@ android:layout_width="match_parent"
         android:text="125"
         android:textSize="14dp"
         android:textColor="#000"
-        android:gravity="start"
+        android:gravity="end"
+        android:layout_marginRight="10dp"
         android:layout_weight="1"
         >
 

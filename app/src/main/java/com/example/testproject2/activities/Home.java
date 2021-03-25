@@ -16,11 +16,13 @@ import com.google.gson.JsonObject;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +30,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,15 +54,21 @@ public class Home extends AppCompatActivity {
     private Toolbar toolbar;
     RecyclerView recyclerView;
     private TextView FormDtae,ToDate;
-    LinearLayout fromLayout,toLayout;
+    LinearLayout fromLayout,toLayout,no_data_found;
     final Calendar myCalendar = Calendar.getInstance();
     ImageButton searchButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         toolbar = findViewById(R.id.home_toolbar);
         setSupportActionBar(toolbar);
+        // set Toolbar Title
+        toolbar.setTitle(SharedPreference.getInstance(getApplicationContext()).getUser().getBranchName());
+//        set toolbar sub title
+        toolbar.setSubtitle(SharedPreference.getInstance(getApplicationContext()).getUser().getEmailId());
+        no_data_found =findViewById(R.id.No_Data_Found_Layout);
 
         FormDtae=findViewById(R.id.homeFormDateButtom);
         ToDate=findViewById(R.id.homeToDateButtom);
@@ -135,6 +144,7 @@ public class Home extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
         getMenuInflater().inflate(R.menu.home_menu, menu);
         // change color for icon 0
 
@@ -183,6 +193,7 @@ public class Home extends AppCompatActivity {
         ToDate.setText(sdf.format(date));
     }
     public void getHomeLists(String fromDate,String toDate){
+
         ProgressDialog progressDialog = new ProgressDialog(Home.this);
         progressDialog.setMessage("Loading...");
         progressDialog.show();
@@ -206,15 +217,15 @@ public class Home extends AppCompatActivity {
                     ArrayList<HomeList> homeLists=response.body();
                     if(homeLists.size()==0)
                     {
-                        Toast.makeText(getApplicationContext(),"No Data Found",Toast.LENGTH_SHORT).show();
-                        System.out.println(homeLists.toString());
+
+                        no_data_found.setVisibility(View.VISIBLE);
                         AdapterOfHomeItems homeAdapter=new AdapterOfHomeItems(Home.this,homeLists);
                         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                         recyclerView.setAdapter(homeAdapter);
                     }
                     else
                     {
-                        System.out.println(homeLists.toString());
+                        no_data_found.setVisibility(View.GONE);
                         float tCount=0,tValue=0,tQty=0;
                         for(int i=0;i<homeLists.size();i++)
                         {
@@ -232,6 +243,7 @@ public class Home extends AppCompatActivity {
                 }
                 else {
                     progressDialog.dismiss();
+
                     Toast.makeText(getApplicationContext(),"Something Wrong",Toast.LENGTH_LONG).show();
                 }
             }

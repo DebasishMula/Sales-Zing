@@ -46,7 +46,7 @@ public class Register extends AppCompatActivity {
 
     private RecyclerView recyclerView;
 
-    LinearLayout startDate,endDate,reg_count_total_val_layout,reg_heading;
+    LinearLayout startDate,endDate,reg_count_total_val_layout,reg_heading,no_data_found;
     TextView fromDate,toDate,count_row,total_val;
     ImageButton imageButton;
     DatePicker picker;
@@ -66,6 +66,7 @@ public class Register extends AppCompatActivity {
         startDate=findViewById(R.id.start_date_layout);
         reg_count_total_val_layout=findViewById(R.id.reg_count_total_val_layout);
         reg_heading=findViewById(R.id.reg_heading);
+        no_data_found=findViewById(R.id.No_Data_Found_Layout);
 
         recyclerView=findViewById(R.id.reg_recycler_view);
         imageButton=findViewById(R.id.reg_search_btn);
@@ -182,6 +183,7 @@ public class Register extends AppCompatActivity {
 
                     if(!response.body().isEmpty()){
                         progressDialog.dismiss();
+                        no_data_found.setVisibility(View.GONE);
                         ArrayList<RegisterItem> rs = response.body();
                         //Toast.makeText(getApplicationContext(),rs.get(0).getTaxper(),Toast.LENGTH_LONG).show();
 
@@ -193,7 +195,9 @@ public class Register extends AppCompatActivity {
                     else {
                         set_count_and_total_mrp_val(new ArrayList<RegisterItem>());
                         progressDialog.dismiss();
-                        Toast.makeText(getApplicationContext(),"No Data Found !",Toast.LENGTH_LONG).show();
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                        recyclerView.setAdapter(new AdapterOfRegisterItems(Register.this,new ArrayList<>(),set_count_and_total_mrp_val(new ArrayList<>())));
+                        no_data_found.setVisibility(View.VISIBLE);
                     }
 
                 }

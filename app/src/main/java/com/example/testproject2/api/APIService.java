@@ -7,6 +7,7 @@ import com.example.testproject2.models.MasterResponse;
 import com.example.testproject2.models.PosItem;
 import com.example.testproject2.models.RegisterItem;
 import com.example.testproject2.models.ResponseSms;
+import com.example.testproject2.models.SalesPerson;
 import com.google.gson.JsonObject;
 
 import org.json.JSONObject;
@@ -37,13 +38,10 @@ public interface APIService {
 
 
     //the signin call
-    @FormUrlEncoded
-    @POST("auth/login/")
+    @POST("szapi.php?action=userdetails")
     Call<LogInResult> userLogin(
-            @Field("mobile") String email,
-            @Field("password") String password);
-           // @Field("deviceId") String deviceId,
-            //@Field("ipAddress") String ipAddress);
+            @Body JsonObject authDetails
+    );
 
     @POST("szapi.php?action=getbatchdetails")
     Call<ArrayList<PosItem>> getPosLists(
@@ -62,6 +60,10 @@ public interface APIService {
     );
     @POST("szapi.php?action=getsalesregister")
     Call<ArrayList<RegisterItem>> getRegisterList(
+            @Body JsonObject data
+    );
+    @POST("szapi.php?action=getsalesperson")
+    Call<ArrayList<SalesPerson>> getSalesPersonList(
             @Body JsonObject data
     );
 

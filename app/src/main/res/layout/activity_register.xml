@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#096D9C"
+    android:background="#FFB3E5FC"
 
 
     tools:context=".activities.Register">
@@ -16,7 +16,7 @@
         android:id="@+id/registerToolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#06567C"
+        android:background="#FF01579B"
         app:title="Day Book"
         app:navigationIcon="@drawable/ic_book"
         app:titleTextColor="#FFF"
@@ -116,7 +116,7 @@
         android:weightSum="3"
         android:layout_marginHorizontal="4dp"
         android:paddingVertical="11dp"
-        android:background="#0C4675"
+        android:background="#FF0277BD"
 
         android:layout_marginBottom="2dp"
 
@@ -161,13 +161,33 @@
         </TextView>
 
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/No_Data_Found_Layout"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#FFB3E5FC"
+        android:gravity="center"
+        android:layout_marginVertical="17dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No Data Found !"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="#63F35C5C"
+            >
 
+        </TextView>
+    </LinearLayout>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/reg_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="4dp"
-            android:background="#096D9C">
+            >
         </androidx.recyclerview.widget.RecyclerView>
 
           >

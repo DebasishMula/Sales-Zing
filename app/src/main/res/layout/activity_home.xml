@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#096D9C"
+    android:background="#FFB3E5FC"
     tools:context=".activities.Home">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/home_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#06567C"
+        android:background="#FF01579B"
         app:title="HATIBAGAN"
         app:subtitle="hatibagan@gmail.com"
         app:subtitleTextColor="#CCCACA"
@@ -123,7 +123,7 @@
         android:gravity="center"
         android:layout_marginHorizontal="4dp"
         android:paddingHorizontal="3dp"
-        android:background="#0C4675"
+        android:background="#FF0277BD"
         >
         <TextView
             android:layout_width="0dp"
@@ -131,6 +131,7 @@
             android:text="#"
             android:textStyle="bold"
             android:textSize="14dp"
+            android:layout_marginLeft="10dp"
             android:textColor="#FFF"
             android:gravity="start"
             android:layout_weight="0.5"
@@ -156,9 +157,9 @@
             android:textStyle="bold"
             android:textSize="14dp"
             android:textColor="#FFF"
-            android:paddingLeft="10dp"
+
             android:layout_weight=".7"
-            android:gravity="start"
+            android:gravity="end"
             >
 
         </TextView>
@@ -171,7 +172,7 @@
             android:textColor="#FFF"
 
             android:layout_weight="1"
-            android:gravity="start"
+            android:gravity="end"
             >
 
         </TextView>
@@ -182,19 +183,41 @@
             android:textStyle="bold"
             android:textSize="14dp"
             android:textColor="#FFF"
-            android:gravity="start"
+            android:gravity="end"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
             >
 
         </TextView>
 
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/No_Data_Found_Layout"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#FFB3E5FC"
+        android:gravity="center"
+        android:layout_marginVertical="17dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No Data Found !"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="#63F35C5C"
+          >
+
+        </TextView>
+    </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/home_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginHorizontal="4dp"
-        android:layout_marginVertical="5dp"
+        android:layout_marginVertical="3dp"
 
         >
     </androidx.recyclerview.widget.RecyclerView>

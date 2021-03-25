@@ -47,7 +47,7 @@ public class AdapterOfPositems extends RecyclerView.Adapter<AdapterOfPositems.Vi
      holder.pos_card_art_batch.setText(posItems.get(position).getItemName()+" ("+posItems.get(position).getBatch_name()+")");
      holder.pos_card_size_color.setText(posItems.get(position).getColor_name()+" ("+posItems.get(position).getFSize()+")");
      holder.pos_card_mrp.setText(String.valueOf(  posItems.get(position).getMRP()));
-     holder.pos_card_qty.setText("1");
+     holder.pos_card_qty.setText(posItems.get(position).getQty());
      holder.pos_card_gross_amount.setText(String.valueOf(Float.valueOf(posItems.get(position).getMRP()) * Float.valueOf(holder.pos_card_qty.getText().toString())));
      //adding event to image button
         holder.pos_card_del_btn.setOnClickListener(new View.OnClickListener() {

@@ -21,8 +21,14 @@ import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.testproject2.R;
@@ -37,7 +43,9 @@ import com.example.testproject2.models.MasterItem;
 import com.example.testproject2.models.PosItem;
 import com.example.testproject2.models.PosItemSave;
 import com.example.testproject2.models.ResponseSms;
+import com.example.testproject2.models.SalesPerson;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
@@ -57,11 +65,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Pos extends AppCompatActivity {
    private RecyclerView recyclerView;
+   private Switch aSwitch;
+    private Spinner spinner;
+    private String SalesPersonId;
+   private boolean isCheckedSwitch;
     private EditText barcode,mobileInput;
     ArrayList<PosItem> posItemList=new ArrayList<>();
     ArrayList<PosItemSave>saveList=new ArrayList<>();
     FloatingActionButton save,cancel,add;
     Button scan;
+    ImageButton btn_clear;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,12 +85,36 @@ public class Pos extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_back);//setting actionbar indicator
         barcode=findViewById(R.id.posBarcode);
+        aSwitch=findViewById(R.id.pos_switchButton);
+        spinner =  findViewById(R.id.pos_sales_spinner);
+//         Assign to salesPerson Name to Spinner
+        getSalesPersonList();
+        aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+               isCheckedSwitch=isChecked;
+               if(isChecked)
+                   barcode.setHint("Return Batch No.");
+               else
+                   barcode.setHint("Enter Batch No.");
+
+
+            }
+        });
+        btn_clear=findViewById(R.id.pos_btn_clear);
         mobileInput=findViewById(R.id.posMobile);
         recyclerView=findViewById(R.id.pos_recycler_view);
         cancel=findViewById(R.id.pos_floating_action_button2);
         save=findViewById(R.id.pos_floating_action_button1);
         add=findViewById(R.id.pos_floating_action_button3);
         scan=findViewById(R.id.posScan);
+        btn_clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                barcode.setText("");
+            }
+        });
         scan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,7 +131,13 @@ public class Pos extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!barcode.getText().toString().equals("")) { //if edittext include text
+                    btn_clear.setVisibility(View.VISIBLE);
+                } else { //not include text
+                    btn_clear.setVisibility(View.GONE);
 
+
+                }
             }
 
             @Override
@@ -106,6 +149,7 @@ public class Pos extends AppCompatActivity {
                     barcode.setText("");
                     barcode.clearFocus();
                     hideKeyboardFrom(getApplicationContext(),barcode);
+
                 }
 
             }
@@ -113,17 +157,7 @@ public class Pos extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (mobileInput.getText().toString().length()!=10)
-                {
-                    Toast.makeText(getApplicationContext(),"Invalid Mobile No.",Toast.LENGTH_SHORT).show();
-
-                }
-                else
-                {
                     savePosItemList();
-                }
-
             }
         });
         cancel.setOnClickListener(new View.OnClickListener() {
@@ -201,22 +235,27 @@ public void getPosItemList(String batchname){
     call.enqueue(new Callback<ArrayList<PosItem>>() {
         @Override
         public void onResponse(Call<ArrayList<PosItem>> call, Response<ArrayList<PosItem>> response) {
+            String qty;
+            if(isCheckedSwitch)
+                qty="-1";
+            else qty="1";
             if(response.isSuccessful())
             {
                 progressDialog.dismiss();
-                System.out.println(response.body());
-                System.out.println("hello");
                 try {
                     ArrayList<PosItem> rs = response.body();
                     if (rs.size()>0) {
+
                         PosItem pos1 = rs.get(0);
+                        pos1.setQty(qty);
                         posItemList.add(pos1);
-                        PosItemSave posItemSave=new PosItemSave(pos1.getItem_id(),pos1.getBatch_name(),"1", pos1.getMRP(),pos1.getColor_name(),pos1.getUomName(),pos1.getGstRate(),String.valueOf(1*Float.valueOf(pos1.getMRP())),pos1.getFSize());
+                        PosItemSave posItemSave=new PosItemSave(pos1.getItem_id(),pos1.getBatch_name(),qty, pos1.getMRP(),pos1.getColor_name(),pos1.getUomName(),pos1.getGstRate(),String.valueOf(1*Float.valueOf(pos1.getMRP())),pos1.getFSize());
+                        System.out.println(qty);
                         saveList.add(posItemSave);
-                        Log.e("Success", new Gson().toJson(response.body()));
                         AdapterOfPositems adapter = new AdapterOfPositems(Pos.this, posItemList,saveList,recyclerView);
                         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                         recyclerView.setAdapter(adapter);
+                        aSwitch.setChecked(false);
                     }
                     else
                     {
@@ -339,6 +378,72 @@ public void getPosItemList(String batchname){
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+    }
+    private void getSalesPersonList()
+    {
+
+
+        ProgressDialog progressDialog = new ProgressDialog(Pos.this);
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
+        TokenInterceptor interceptor=new TokenInterceptor(SharedPreference.getInstance(getApplicationContext()).getUser().getToken());
+        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+        Retrofit retrofit=new Retrofit.Builder().client(client).baseUrl(APIURL.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
+        APIService apiServices= retrofit.create(APIService.class);
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("authtoken",SharedPreference.getInstance(getApplicationContext()).getUser().getToken());
+        jsonObject.addProperty("userid",SharedPreference.getInstance(getApplicationContext()).getUser().getUserId());
+
+        System.out.println(jsonObject);
+        Call<ArrayList<SalesPerson>> call=apiServices.getSalesPersonList(jsonObject);
+        System.out.println(jsonObject);
+        call.enqueue(new Callback<ArrayList<SalesPerson>>() {
+            @Override
+            public void onResponse(Call<ArrayList<SalesPerson>> call, Response<ArrayList<SalesPerson>> response) {
+
+                if(response.isSuccessful())
+                {
+                    progressDialog.dismiss();
+                    ArrayList<SalesPerson> salesPersonList=response.body();
+                    String[] item =new String[salesPersonList.size()];
+                    for(int i=0;i<salesPersonList.size();i++){
+
+                        item[i]=salesPersonList.get(i).getSalespersonname();
+                    }
+                    //System.out.println(item.length);
+                    ArrayAdapter<String> adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item,item);
+                    // Specify the layout to use when the list of choices appears
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    // Apply the adapter to the spinner
+                    spinner.setAdapter(adapter);
+                    spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            SalesPersonId=salesPersonList.get(position).getSalespersonID();
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    });
+
+                }
+                else
+                {
+                    progressDialog.dismiss();
+                    Toast.makeText(getApplicationContext(),"Something Wrong",Toast.LENGTH_LONG).show();
+                }
+
+            }
+            @Override
+            public void onFailure(Call<ArrayList<SalesPerson>> call, Throwable t) {
+                Log.v("rese",call.request().url().toString());
+                progressDialog.dismiss();
+                Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
 }
 

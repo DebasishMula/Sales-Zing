@@ -41,7 +41,7 @@ public class AdapterOfHomeItems extends RecyclerView.Adapter<AdapterOfHomeItems.
             holder.value.setText(homes.get(position).getValue());
             holder.count.setText(homes.get(position).getCnt());
             holder.sl_no.setText("Total");
-            holder.itemView.setBackgroundColor(Color.rgb(67, 4, 8));
+            holder.itemView.setBackgroundColor(Color.rgb(81, 85, 85));
             holder.count.setTextColor(Color.WHITE);
             holder.value.setTextColor(Color.WHITE);
             holder.qty.setTextColor(Color.WHITE);

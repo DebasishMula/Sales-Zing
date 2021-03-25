@@ -11,10 +11,12 @@ public class SharedPreference {
 
     private static final String SHARED_PREF_NAME = "salesZingSharedprefretrofit";
 
-    private static final String KEY_USER_ID = "keyuserid";
-
-    private static final String KEY_USER_EMAIL = "keyuseremail";
-
+    private static final String KEY_USER_ID = "userId";
+    private static final String KEY_USER_EMAIL = "userEmail";
+    private static final String KEY_USER_TOKEN = "userToken";
+    private static final String KEY_USER_DEVICE_ID = "userDeviceId";
+    private static final String KEY_USER_BRANCH_NAME = "userBranchName";
+    private static final String KEY_USER_BRANCH_ID = "userBranchId";
 
     private SharedPreference(Context context) {
         mCtx = context;
@@ -30,10 +32,13 @@ public class SharedPreference {
     public boolean userLogin(User user) {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(KEY_USER_ID, user.getToken());
         editor.putString(KEY_USER_EMAIL, user.getEmailId());
         editor.putString("pass", user.getPassword());
-
+        editor.putString(KEY_USER_TOKEN, user.getToken());
+        editor.putString(KEY_USER_DEVICE_ID, user.getDeviceId());
+        editor.putString(KEY_USER_ID, user.getUserId());
+        editor.putString(KEY_USER_BRANCH_NAME, user.getBranchName());
+        editor.putString(KEY_USER_BRANCH_ID, user.getBranchid());
         editor.apply();
         return true;
     }
@@ -46,13 +51,17 @@ public class SharedPreference {
     }
 
     public User getUser() {
+
+
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         return new User(
                 sharedPreferences.getString(KEY_USER_EMAIL, null),
-
                 sharedPreferences.getString("pass", "pass"),
-
-                sharedPreferences.getString(KEY_USER_ID, null)
+                sharedPreferences.getString(KEY_USER_TOKEN,null),
+                sharedPreferences.getString(KEY_USER_DEVICE_ID,null),
+                sharedPreferences.getString(KEY_USER_ID, null),
+                sharedPreferences.getString(KEY_USER_BRANCH_NAME,null),
+                sharedPreferences.getString(KEY_USER_BRANCH_ID,null)
 
         );
     }

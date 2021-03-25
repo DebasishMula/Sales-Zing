@@ -1,32 +1,81 @@
 package com.example.testproject2.models;
+import java.io.Serializable;
 
-public class LogInResult {
+@SuppressWarnings("serial")
+public class LogInResult implements   Serializable{
 
 
-private  String token,email;
+    private  String status_code,status_message,msgstr,branchname,authtoken,userid;
 
-    public LogInResult(String token, String email) {
 
-        this.token = token;
-        this.email = email;
-
+    public LogInResult(String status_code, String status_message, String msgstr, String branchname, String authtoken, String userid) {
+        this.status_code = status_code;
+        this.status_message = status_message;
+        this.msgstr = msgstr;
+        this.branchname = branchname;
+        this.authtoken = authtoken;
+        this.userid = userid;
     }
 
-    public String getToken() {
-        return token;
+    public String getStatus_code() {
+        return status_code;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setStatus_code(String status_code) {
+        this.status_code = status_code;
     }
 
-    public String getEmail() {
-        return email;
+    public String getStatus_message() {
+        return status_message;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setStatus_message(String status_message) {
+        this.status_message = status_message;
+    }
+
+    public String getMsgstr() {
+        return msgstr;
+    }
+
+    public void setMsgstr(String msgstr) {
+        this.msgstr = msgstr;
     }
 
 
+
+    public String getBranchname() {
+        return branchname;
+    }
+
+    public void setBranchname(String branchname) {
+        this.branchname = branchname;
+    }
+
+    public String getAuthtoken() {
+        return authtoken;
+    }
+
+    public void setAuthtoken(String authtoken) {
+        this.authtoken = authtoken;
+    }
+
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
+
+    @Override
+    public String toString() {
+        return "LogInResult{" +
+                "status_code='" + status_code + '\'' +
+                ", status_message='" + status_message + '\'' +
+                ", msgstr='" + msgstr + '\'' +
+                ", branchname='" + branchname + '\'' +
+                ", authtoken='" + authtoken + '\'' +
+                ", userid='" + userid + '\'' +
+                '}';
+    }
 }
