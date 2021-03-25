@@ -250,7 +250,6 @@ public void getPosItemList(String batchname){
                         pos1.setQty(qty);
                         posItemList.add(pos1);
                         PosItemSave posItemSave=new PosItemSave(pos1.getItem_id(),pos1.getBatch_name(),qty, pos1.getMRP(),pos1.getColor_name(),pos1.getUomName(),pos1.getGstRate(),String.valueOf(1*Float.valueOf(pos1.getMRP())),pos1.getFSize());
-                        System.out.println(qty);
                         saveList.add(posItemSave);
                         AdapterOfPositems adapter = new AdapterOfPositems(Pos.this, posItemList,saveList,recyclerView);
                         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
