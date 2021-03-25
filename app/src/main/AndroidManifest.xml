@@ -38,11 +38,16 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <activity android:name=".activities.About" />
-        <activity android:name=".activities.Register" />
-        <activity android:name=".activities.Pos" />
-        <activity android:name=".activities.Master" />
-        <activity android:name=".activities.Home" />
+        <activity android:name=".activities.About" android:noHistory = "true"/>
+        <activity android:name=".activities.Register" android:noHistory = "true"/>
+        <activity android:name=".activities.Pos" android:noHistory = "false"/>
+        <activity android:name=".activities.Master" android:noHistory = "true">
+
+        </activity>
+        <activity android:name=".activities.Home"
+            android:launchMode="singleTask" >
+
+        </activity>
         <activity
             android:name=".activities.LogIn"
             >

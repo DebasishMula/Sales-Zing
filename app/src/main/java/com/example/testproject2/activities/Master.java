@@ -1,12 +1,17 @@
 package com.example.testproject2.activities;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -18,6 +23,7 @@ import com.example.testproject2.helpers.SharedPreference;
 import com.example.testproject2.helpers.TokenInterceptor;
 import com.example.testproject2.models.MasterItem;
 import com.example.testproject2.models.MasterResponse;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -33,14 +39,37 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Master extends AppCompatActivity {
    private RecyclerView recyclerView;
-
+   private ExtendedFloatingActionButton posTab;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_master);
         recyclerView=findViewById(R.id.masterRecyclerView);
+        posTab=findViewById(R.id.master_extendedFloatingButton1);
+        Toolbar toolbar = findViewById(R.id.masterToolbar);//connecting toolbar  view with toolbar object
+        setSupportActionBar(toolbar); //calling method to support actionbar with toolbar
+        ActionBar actionBar = getSupportActionBar();//initializing actionbar
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_back);//setting actionbar indicator
+        posTab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),Pos.class));
+            }
+        });
          getMasterItems();
     }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent=new Intent(getApplicationContext(),Home.class);
+                startActivity(intent);
+                finish();
+                return true;
+
+        }
+        return super.onOptionsItemSelected(item);
+    }//to open navigation after clicking action bar
     public void getMasterItems(){
         ProgressDialog progressDialog = new ProgressDialog(Master.this);
         progressDialog.setMessage("Loading...");

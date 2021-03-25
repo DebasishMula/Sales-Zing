@@ -35,38 +35,27 @@
 
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
-
+            android:layout_marginHorizontal="10dp"
             android:layout_marginVertical="10dp"
-
             android:orientation="horizontal"
             android:weightSum="4"
 
             >
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight=".5"
-                android:text="SPID"
-
-               android:layout_marginLeft="8dp"
-                android:textStyle="bold">
-
-            </TextView>
 
             <Spinner
                 android:id="@+id/pos_sales_spinner"
                 android:layout_width="0dp"
                 android:layout_height="27dp"
-                android:layout_weight="1.8"
+                android:layout_weight="2"
                 android:background="@drawable/edittext_shape1"
                 />
 
             <TextView
+                android:id="@+id/posDate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.7"
+                android:layout_weight="2"
                 android:text="20/02/2021"
                 android:gravity="right"
                 android:paddingRight="10dp"
@@ -80,7 +69,7 @@
             android:id="@+id/pos_2nd_layout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-
+            android:layout_marginHorizontal="10dp"
             android:layout_marginBottom="10dp"
             android:orientation="horizontal"
             android:layout_weight="4"
@@ -94,11 +83,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
 
-                android:layout_marginLeft="8dp"
                 android:background="@drawable/edittext_shape1"
                 android:inputType="number"
                 android:hint="Mobile No."
-                android:drawableLeft="@drawable/ic_mobile"
+                android:paddingStart="10dp"
                 android:paddingVertical="4dp"
                 android:textSize="15dp"
                >
@@ -107,11 +95,12 @@
 
 
             <TextView
+                android:id="@+id/posTime"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
 
                 android:layout_weight="2"
-                android:text="1234566790"
+                android:text="New Number"
                 android:layout_gravity="center"
                 android:gravity="right"
                 android:paddingRight="10dp"
@@ -153,6 +142,9 @@
                     android:checked="false"
                     android:layout_centerInParent="true"
                     android:layout_height="match_parent"
+                    android:trackTint="@color/AppColor"
+                    android:thumbTint="@color/AppColor"
+
                     />
 
             </LinearLayout>
@@ -160,7 +152,7 @@
     android:layout_width="0dp"
     android:layout_height="40dp"
     android:orientation="horizontal"
-    android:layout_weight="1.3"
+    android:layout_weight="1.2"
     android:layout_gravity="center"
     android:layout_marginLeft="2dp"
     android:background="@drawable/edittext_shape1"
@@ -170,7 +162,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="2.8"
-        android:hint="Enter Batch No."
+        android:hint="Scan Batch No."
         android:paddingLeft="10dp"
         android:backgroundTint="#fff"
         >
@@ -196,7 +188,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="7dp"
                 android:layout_marginVertical="16dp"
-                android:layout_weight="0.4"
+                android:layout_weight="0.5"
                 android:backgroundTint="#FF01579B"
                 android:text="Scan">
 
@@ -275,7 +267,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Mrp Value"
+                android:text="MRP Value"
                 android:textColor="#fff"
                 android:textSize="12dp"
                 android:textStyle="bold">

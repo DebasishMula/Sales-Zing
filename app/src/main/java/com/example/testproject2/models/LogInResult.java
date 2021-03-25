@@ -5,16 +5,17 @@ import java.io.Serializable;
 public class LogInResult implements   Serializable{
 
 
-    private  String status_code,status_message,msgstr,branchname,authtoken,userid;
+    private  String status_code,status_message,msgstr,branchname,authtoken,userid,branchid;
 
 
-    public LogInResult(String status_code, String status_message, String msgstr, String branchname, String authtoken, String userid) {
+    public LogInResult(String status_code, String status_message, String msgstr, String branchname, String authtoken, String userid,String branchid) {
         this.status_code = status_code;
         this.status_message = status_message;
         this.msgstr = msgstr;
         this.branchname = branchname;
         this.authtoken = authtoken;
         this.userid = userid;
+        this.branchid=branchid;
     }
 
     public String getStatus_code() {
@@ -67,6 +68,14 @@ public class LogInResult implements   Serializable{
         this.userid = userid;
     }
 
+    public String getBranchid() {
+        return branchid;
+    }
+
+    public void setBranchid(String branchid) {
+        this.branchid = branchid;
+    }
+
     @Override
     public String toString() {
         return "LogInResult{" +
@@ -76,6 +85,7 @@ public class LogInResult implements   Serializable{
                 ", branchname='" + branchname + '\'' +
                 ", authtoken='" + authtoken + '\'' +
                 ", userid='" + userid + '\'' +
+                ", branchid='" + branchid + '\'' +
                 '}';
     }
 }

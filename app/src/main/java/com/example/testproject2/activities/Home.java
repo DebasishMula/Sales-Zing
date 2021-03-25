@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.testproject2.R;
 import com.example.testproject2.adapter.AdapterOfHomeItems;
@@ -12,6 +13,7 @@ import com.example.testproject2.api.APIURL;
 import com.example.testproject2.helpers.SharedPreference;
 import com.example.testproject2.helpers.TokenInterceptor;
 import com.example.testproject2.models.HomeList;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.gson.JsonObject;
 
 import android.app.DatePickerDialog;
@@ -34,6 +36,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -57,6 +60,8 @@ public class Home extends AppCompatActivity {
     LinearLayout fromLayout,toLayout,no_data_found;
     final Calendar myCalendar = Calendar.getInstance();
     ImageButton searchButton;
+    SwipeRefreshLayout swipeRefreshLayout;
+    ExtendedFloatingActionButton posTab;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -69,12 +74,16 @@ public class Home extends AppCompatActivity {
 //        set toolbar sub title
         toolbar.setSubtitle(SharedPreference.getInstance(getApplicationContext()).getUser().getEmailId());
         no_data_found =findViewById(R.id.No_Data_Found_Layout);
+        swipeRefreshLayout=findViewById(R.id.homeSwipeToRefresh);
+
 
         FormDtae=findViewById(R.id.homeFormDateButtom);
         ToDate=findViewById(R.id.homeToDateButtom);
         fromLayout=findViewById(R.id.home_start_date_layout);
         toLayout=findViewById(R.id.home_end_date_layout);
         searchButton=findViewById(R.id.homeSearchButton);
+        posTab=findViewById(R.id.home_extendedFloatingButton1);
+        recyclerView=findViewById(R.id.home_recycler_view);
 //        initialize FromDate And ToDate
         initializeFromAndToDate();
 
@@ -96,7 +105,7 @@ public class Home extends AppCompatActivity {
             }
 
         });
-        recyclerView=findViewById(R.id.home_recycler_view);
+
         getHomeLists(FormDtae.getText().toString(),ToDate.getText().toString());
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,6 +113,20 @@ public class Home extends AppCompatActivity {
                 getHomeLists(FormDtae.getText().toString(),ToDate.getText().toString());
             }
         });
+        posTab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),Pos.class));
+            }
+        });
+        swipeRefreshLayout.setOnRefreshListener(
+                new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        doYourUpdate();
+                    }
+                }
+        );
 
     }
 //    From Date
@@ -142,6 +165,11 @@ public class Home extends AppCompatActivity {
 
     };
 
+    private void  doYourUpdate()
+    {
+        getHomeLists(FormDtae.getText().toString(),ToDate.getText().toString());
+        swipeRefreshLayout.setRefreshing(false); // Disables the refresh icon
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -203,8 +231,8 @@ public class Home extends AppCompatActivity {
         APIService apiServices= retrofit.create(APIService.class);
         System.out.println(SharedPreference.getInstance(getApplicationContext()).getUser().getToken());
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("dbname","cw_ajanta");
-        jsonObject.addProperty("authtoken","1");
+        jsonObject.addProperty("authtoken",SharedPreference.getInstance(getApplicationContext()).getUser().getToken());
+        jsonObject.addProperty("userid",SharedPreference.getInstance(getApplicationContext()).getUser().getUserId());
         jsonObject.addProperty("fromdate",fromDate);
         jsonObject.addProperty("todate",toDate);
         System.out.println(jsonObject);
@@ -226,14 +254,17 @@ public class Home extends AppCompatActivity {
                     else
                     {
                         no_data_found.setVisibility(View.GONE);
-                        float tCount=0,tValue=0,tQty=0;
+                        float tCount=0,tValue=0;
+                        int tQty=0;
+                        DecimalFormat df = new DecimalFormat();
+                        df.setMaximumFractionDigits(2);
                         for(int i=0;i<homeLists.size();i++)
                         {
                             tCount=tCount+ Float.valueOf( homeLists.get(i).getCnt());
                             tValue=tValue+ Float.valueOf( homeLists.get(i).getValue());
-                            tQty=tQty+ Float.valueOf( homeLists.get(i).getQty());
+                            tQty=tQty+ Integer.parseInt( homeLists.get(i).getQty());
                         }
-                        HomeList totalRowItem=new HomeList("",String.valueOf(tQty),String.valueOf(tValue),String.valueOf(tCount));
+                        HomeList totalRowItem=new HomeList("",String.valueOf(tQty), String.format("%.02f", tValue),String.valueOf(tCount));
                         homeLists.add(totalRowItem);
                         AdapterOfHomeItems homeAdapter=new AdapterOfHomeItems(Home.this,homeLists);
                         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -255,4 +286,5 @@ public class Home extends AppCompatActivity {
             }
         });
     }
+
 }

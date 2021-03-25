@@ -96,4 +96,19 @@ public class PosItemSave {
     public void setFsize(String fsize) {
         this.fsize = fsize;
     }
+
+    @Override
+    public String toString() {
+        return "PosItemSave{" +
+                "itemid='" + itemid + '\'' +
+                ", batchname='" + batchname + '\'' +
+                ", qty='" + qty + '\'' +
+                ", mrp='" + mrp + '\'' +
+                ", color='" + color + '\'' +
+                ", uom='" + uom + '\'' +
+                ", amount='" + amount + '\'' +
+                ", gstrate='" + gstrate + '\'' +
+                ", fsize='" + fsize + '\'' +
+                '}';
+    }
 }

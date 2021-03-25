@@ -14,7 +14,6 @@ public class MasterItem {
         this.colour = colour;
         this.fsize = fsize;
     }
-
     public String getItemname() {
         return itemname;
     }

@@ -38,6 +38,7 @@ public class SharedPreference {
         editor.putString(KEY_USER_DEVICE_ID, user.getDeviceId());
         editor.putString(KEY_USER_ID, user.getUserId());
         editor.putString(KEY_USER_BRANCH_NAME, user.getBranchName());
+
         editor.putString(KEY_USER_BRANCH_ID, user.getBranchid());
         editor.apply();
         return true;

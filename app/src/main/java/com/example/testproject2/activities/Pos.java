@@ -13,6 +13,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -29,6 +31,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.testproject2.R;
@@ -53,7 +56,11 @@ import com.google.gson.JsonObject;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import okhttp3.OkHttpClient;
@@ -68,13 +75,15 @@ public class Pos extends AppCompatActivity {
    private Switch aSwitch;
     private Spinner spinner;
     private String SalesPersonId;
-   private boolean isCheckedSwitch;
+    private boolean isCheckedSwitch;
     private EditText barcode,mobileInput;
     ArrayList<PosItem> posItemList=new ArrayList<>();
     ArrayList<PosItemSave>saveList=new ArrayList<>();
     FloatingActionButton save,cancel,add;
     Button scan;
     ImageButton btn_clear;
+    private TextView todaysDate,currentTime;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +96,14 @@ public class Pos extends AppCompatActivity {
         barcode=findViewById(R.id.posBarcode);
         aSwitch=findViewById(R.id.pos_switchButton);
         spinner =  findViewById(R.id.pos_sales_spinner);
+        todaysDate=findViewById(R.id.posDate);
+        currentTime=findViewById(R.id.posTime);
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat timeformatter = new SimpleDateFormat("HH:mm");
+        Date date = new Date();
+        todaysDate.setText(formatter.format(date));
+        currentTime.setText(timeformatter.format(date));
+
 //         Assign to salesPerson Name to Spinner
         getSalesPersonList();
         aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -95,9 +112,19 @@ public class Pos extends AppCompatActivity {
 
                isCheckedSwitch=isChecked;
                if(isChecked)
+               {
                    barcode.setHint("Return Batch No.");
+                   aSwitch.getTrackDrawable().setTint(Color.rgb(255,0,0));
+                   aSwitch.getThumbDrawable().setTint(Color.rgb(255,0,0));
+               }
+
                else
+               {
                    barcode.setHint("Enter Batch No.");
+                   aSwitch.getTrackDrawable().setTint(Color.rgb(8,27,124));
+                   aSwitch.getThumbDrawable().setTint(Color.rgb(8,27,124));
+               }
+
 
 
             }
@@ -235,10 +262,7 @@ public void getPosItemList(String batchname){
     call.enqueue(new Callback<ArrayList<PosItem>>() {
         @Override
         public void onResponse(Call<ArrayList<PosItem>> call, Response<ArrayList<PosItem>> response) {
-            String qty;
-            if(isCheckedSwitch)
-                qty="-1";
-            else qty="1";
+
             if(response.isSuccessful())
             {
                 progressDialog.dismiss();
@@ -247,6 +271,12 @@ public void getPosItemList(String batchname){
                     if (rs.size()>0) {
 
                         PosItem pos1 = rs.get(0);
+
+//                      set qty to according to switch
+                        String qty;
+                        if(isCheckedSwitch)
+                            qty="-1";
+                        else qty="1";
                         pos1.setQty(qty);
                         posItemList.add(pos1);
                         PosItemSave posItemSave=new PosItemSave(pos1.getItem_id(),pos1.getBatch_name(),qty, pos1.getMRP(),pos1.getColor_name(),pos1.getUomName(),pos1.getGstRate(),String.valueOf(1*Float.valueOf(pos1.getMRP())),pos1.getFSize());
@@ -299,18 +329,17 @@ public void getPosItemList(String batchname){
         Retrofit retrofit=new Retrofit.Builder().client(client).baseUrl(APIURL.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
         APIService apiServices= retrofit.create(APIService.class);
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("dbname","cw_ajanta");
-        jsonObject.addProperty("emailid","cw_ajanta");
-        jsonObject.addProperty("authtoken","123456");
+        jsonObject.addProperty("userid",SharedPreference.getInstance(getApplicationContext()).getUser().getUserId());
+        jsonObject.addProperty("authtoken",SharedPreference.getInstance(getApplicationContext()).getUser().getToken());
+
         JsonArray jsonArray=new JsonArray();
         JsonObject jsonObject1=new JsonObject();
-        jsonObject1.addProperty("branchid","1");
-        jsonObject1.addProperty("salespersonid","1");
-        jsonObject1.addProperty("voucherno","11254");
-        jsonObject1.addProperty("voucherdate","12/12/2021");
+        jsonObject1.addProperty("branchid",SharedPreference.getInstance(getApplicationContext()).getUser().getBranchid());
+        jsonObject1.addProperty("salespersonid",SalesPersonId);
+        jsonObject1.addProperty("voucherno","<New Number>");
+        jsonObject1.addProperty("voucherdate","");
         jsonObject1.addProperty("mobileno",mobileInput.getText().toString());
         Gson gson = new GsonBuilder().create();
-
         JsonArray jsonArray1 = gson.toJsonTree(saveList).getAsJsonArray();
         jsonObject1.add("items", jsonArray1);
         jsonArray.add(jsonObject1);
@@ -406,7 +435,6 @@ public void getPosItemList(String batchname){
                     ArrayList<SalesPerson> salesPersonList=response.body();
                     String[] item =new String[salesPersonList.size()];
                     for(int i=0;i<salesPersonList.size();i++){
-
                         item[i]=salesPersonList.get(i).getSalespersonname();
                     }
                     //System.out.println(item.length);

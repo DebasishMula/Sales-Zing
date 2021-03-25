@@ -55,7 +55,7 @@ public class AdapterOfPositems extends RecyclerView.Adapter<AdapterOfPositems.Vi
             public void onClick(View v) {
                 AlertDialog.Builder builder=new AlertDialog.Builder(context,R.style.AlertDialogCustom);
                 builder.setTitle("Alert");
-                builder.setMessage("Are You Sure?");
+                builder.setMessage("Are You Sure To Remove?");
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -64,9 +64,11 @@ public class AdapterOfPositems extends RecyclerView.Adapter<AdapterOfPositems.Vi
                         recyclerView.removeViewAt(position);
                         AdapterOfPositems adapterOfPositems=new AdapterOfPositems(context,posItems,saveItems,recyclerView);
                         adapterOfPositems.notifyItemRemoved(position);
+                        recyclerView.setAdapter(adapterOfPositems);
+                        System.out.println(saveItems.toString());
                         Toast.makeText(context, "Deleted Successfully", Toast.LENGTH_SHORT).show();
                     }
-                }).setNegativeButton("Exit", new DialogInterface.OnClickListener() {
+                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                        dialog.dismiss();

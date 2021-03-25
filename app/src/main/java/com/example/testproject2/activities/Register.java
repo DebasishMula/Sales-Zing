@@ -25,6 +25,7 @@ import com.example.testproject2.api.APIURL;
 import com.example.testproject2.helpers.SharedPreference;
 import com.example.testproject2.helpers.TokenInterceptor;
 import com.example.testproject2.models.RegisterItem;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.gson.JsonObject;
 
 import java.text.SimpleDateFormat;
@@ -50,6 +51,7 @@ public class Register extends AppCompatActivity {
     TextView fromDate,toDate,count_row,total_val;
     ImageButton imageButton;
     DatePicker picker;
+    ExtendedFloatingActionButton posTab;
     final Calendar myCalendar = Calendar.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,15 +63,13 @@ public class Register extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_back);//setting actionbar indicator
 
-
-
         startDate=findViewById(R.id.start_date_layout);
         reg_count_total_val_layout=findViewById(R.id.reg_count_total_val_layout);
         reg_heading=findViewById(R.id.reg_heading);
         no_data_found=findViewById(R.id.No_Data_Found_Layout);
-
         recyclerView=findViewById(R.id.reg_recycler_view);
         imageButton=findViewById(R.id.reg_search_btn);
+        posTab=findViewById(R.id.register_extendedFloatingButton1);
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,6 +83,7 @@ public class Register extends AppCompatActivity {
         String formattedDate = df.format(c);
         toDate.setText(formattedDate);
         fromDate.setText(formattedDate);
+        endDate=findViewById(R.id.end_date_layout);
 
         startDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,7 +94,6 @@ public class Register extends AppCompatActivity {
 
             }
         });
-        endDate=findViewById(R.id.end_date_layout);
         endDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,8 +102,12 @@ public class Register extends AppCompatActivity {
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
-
-
+        posTab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),Pos.class));
+            }
+        });
 
         getRegisterItemList(fromDate.getText().toString(),toDate.getText().toString());
 
@@ -151,6 +155,7 @@ public class Register extends AppCompatActivity {
             case android.R.id.home:
                 Intent intent=new Intent(Register.this,Home.class);
                 startActivity(intent);
+                finish();
                 return true;
 
         }
@@ -169,7 +174,8 @@ public class Register extends AppCompatActivity {
         APIService apiServices= retrofit.create(APIService.class);
         System.out.println(SharedPreference.getInstance(getApplicationContext()).getUser().getToken());
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("dbname","cw_ajanta");
+        jsonObject.addProperty("authtoken",SharedPreference.getInstance(getApplicationContext()).getUser().getToken());
+        jsonObject.addProperty("userid",SharedPreference.getInstance(getApplicationContext()).getUser().getUserId());
         jsonObject.addProperty("todate",todate);
         jsonObject.addProperty("fromdate",fromDate);
         Call<ArrayList<RegisterItem>> call=apiServices.getRegisterList(jsonObject);

@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.testproject2.R;
 import com.example.testproject2.api.APIService;
+import com.example.testproject2.api.APIURL;
 import com.example.testproject2.helpers.SharedPreference;
 import com.example.testproject2.models.LogInResult;
 import com.example.testproject2.models.User;
@@ -74,7 +75,7 @@ public class LogIn extends AppCompatActivity {
         this.user = getUserCredentials();
         //creating Retrofit Object
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://103.205.67.69/saleszingapi2/")
+                .baseUrl(APIURL.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -100,13 +101,14 @@ public class LogIn extends AppCompatActivity {
                     if(result.getStatus_code().equals("1"))
                     {
                         Toast.makeText(getApplicationContext(),result.getStatus_message(),Toast.LENGTH_SHORT).show();
-                        User user1 = new User(user.getEmailId(), "", result.getAuthtoken(), getDeviceID(), result.getUserid(), result.getBranchname(),user.getBranchid());
+                        User user1 = new User(user.getEmailId(), "", result.getAuthtoken(), getDeviceID(), result.getUserid(), result.getBranchname(),result.getBranchid());
                         SharedPreference sharedPreference = SharedPreference.getInstance(getApplicationContext());
                         sharedPreference.userLogin(user1);
                         Intent intent = new Intent(LogIn.this, Home.class);
                         startActivity(intent);
                         finish();
                     }
+
                     else
                     {
                         Toast.makeText(getApplicationContext(),result.getStatus_message(),Toast.LENGTH_SHORT).show();

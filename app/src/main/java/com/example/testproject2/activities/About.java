@@ -30,6 +30,7 @@ public class About extends AppCompatActivity {
             case android.R.id.home:
                 Intent intent=new Intent(About.this,Home.class);
                 startActivity(intent);
+                finish();
                 return true;
 
         }

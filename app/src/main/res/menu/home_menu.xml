@@ -21,7 +21,7 @@
     </item>
     <item
         android:id="@+id/home_toolbar_master"
-        android:title="MASTER"
+        android:title="STOCK SUMMARY"
         >
     </item>
     <item

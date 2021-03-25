@@ -146,19 +146,20 @@
             android:textSize="14dp"
             android:textColor="#FFF"
             android:gravity="start"
-            android:layout_weight="1.8"
+            android:layout_weight="2.1"
             >
 
         </TextView>
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Count"
+            android:text="Quantity"
             android:textStyle="bold"
             android:textSize="14dp"
             android:textColor="#FFF"
 
-            android:layout_weight=".7"
+            android:layout_weight="1"
             android:gravity="end"
             >
 
@@ -170,22 +171,9 @@
             android:textStyle="bold"
             android:textSize="14dp"
             android:textColor="#FFF"
-
-            android:layout_weight="1"
-            android:gravity="end"
-            >
-
-        </TextView>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Quantity"
-            android:textStyle="bold"
-            android:textSize="14dp"
-            android:textColor="#FFF"
             android:gravity="end"
             android:layout_marginRight="10dp"
-            android:layout_weight="1"
+            android:layout_weight="1.4"
             >
 
         </TextView>
@@ -212,14 +200,45 @@
 
         </TextView>
     </LinearLayout>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/home_recycler_view"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginHorizontal="4dp"
-        android:layout_marginVertical="3dp"
+        android:layout_height="match_parent">
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/homeSwipeToRefresh">
 
-        >
-    </androidx.recyclerview.widget.RecyclerView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/home_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="4dp"
+            android:layout_marginVertical="3dp"
+
+            >
+        </androidx.recyclerview.widget.RecyclerView>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/home_extendedFloatingButton1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|left"
+            android:layout_margin="16dp"
+            android:backgroundTint="#3F51B5"
+            android:contentDescription="/pos_floating_action_button1"
+            android:gravity="center"
+            android:text="POS"
+            android:textColor="#FFF"
+            app:iconTint="#FFF"
+            app:icon="@drawable/ic_add" />
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </LinearLayout>

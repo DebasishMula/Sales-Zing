@@ -39,10 +39,8 @@ public class AdapterOfHomeItems extends RecyclerView.Adapter<AdapterOfHomeItems.
             holder.name.setText(homes.get(position).getName());
             holder.qty.setText(homes.get(position).getQty());
             holder.value.setText(homes.get(position).getValue());
-            holder.count.setText(homes.get(position).getCnt());
             holder.sl_no.setText("Total");
             holder.itemView.setBackgroundColor(Color.rgb(81, 85, 85));
-            holder.count.setTextColor(Color.WHITE);
             holder.value.setTextColor(Color.WHITE);
             holder.qty.setTextColor(Color.WHITE);
             holder.sl_no.setTextColor(Color.WHITE);
@@ -57,7 +55,6 @@ public class AdapterOfHomeItems extends RecyclerView.Adapter<AdapterOfHomeItems.
             holder.name.setText(homes.get(position).getName());
             holder.qty.setText(homes.get(position).getQty());
             holder.value.setText(homes.get(position).getValue());
-            holder.count.setText(homes.get(position).getCnt());
             int sl_no = position + 1;
             holder.sl_no.setText("" + sl_no);
         }
@@ -77,7 +74,7 @@ public class AdapterOfHomeItems extends RecyclerView.Adapter<AdapterOfHomeItems.
             qty=itemView.findViewById(R.id.home_card_qty);
             value=itemView.findViewById(R.id.home_card_value);
             sl_no=itemView.findViewById(R.id.home_card_sl);
-            count=itemView.findViewById(R.id.home_card_count);
+            //count=itemView.findViewById(R.id.home_card_count);
 
         }
     }
